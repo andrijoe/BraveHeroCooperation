@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            menuStrip1 = new MenuStrip();
+            menuHome = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             dashboardToolStripMenuItem = new ToolStripMenuItem();
             definitionsToolStripMenuItem = new ToolStripMenuItem();
             logoutToolStripMenuItem = new ToolStripMenuItem();
+            profileToolStripMenuItem = new ToolStripMenuItem();
             loanToolStripMenuItem = new ToolStripMenuItem();
             savingToolStripMenuItem = new ToolStripMenuItem();
             transferToolStripMenuItem = new ToolStripMenuItem();
@@ -40,18 +41,18 @@
             acrossCooperationToolStripMenuItem = new ToolStripMenuItem();
             exchangeToolStripMenuItem = new ToolStripMenuItem();
             historyToolStripMenuItem = new ToolStripMenuItem();
-            profileToolStripMenuItem = new ToolStripMenuItem();
-            menuStrip1.SuspendLayout();
+            panelDisplay = new Panel();
+            menuHome.SuspendLayout();
             SuspendLayout();
             // 
-            // menuStrip1
+            // menuHome
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, profileToolStripMenuItem, loanToolStripMenuItem, savingToolStripMenuItem, transferToolStripMenuItem, exchangeToolStripMenuItem, historyToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
+            menuHome.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, profileToolStripMenuItem, loanToolStripMenuItem, savingToolStripMenuItem, transferToolStripMenuItem, exchangeToolStripMenuItem, historyToolStripMenuItem });
+            menuHome.Location = new Point(0, 0);
+            menuHome.Name = "menuHome";
+            menuHome.Size = new Size(800, 24);
+            menuHome.TabIndex = 0;
+            menuHome.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -59,6 +60,7 @@
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Click += fileToolStripMenuItem_Click;
             // 
             // dashboardToolStripMenuItem
             // 
@@ -78,6 +80,12 @@
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             logoutToolStripMenuItem.Size = new Size(137, 22);
             logoutToolStripMenuItem.Text = "Logout";
+            // 
+            // profileToolStripMenuItem
+            // 
+            profileToolStripMenuItem.Name = "profileToolStripMenuItem";
+            profileToolStripMenuItem.Size = new Size(53, 20);
+            profileToolStripMenuItem.Text = "Profile";
             // 
             // loanToolStripMenuItem
             // 
@@ -122,30 +130,32 @@
             historyToolStripMenuItem.Size = new Size(57, 20);
             historyToolStripMenuItem.Text = "History";
             // 
-            // profileToolStripMenuItem
+            // panelDisplay
             // 
-            profileToolStripMenuItem.Name = "profileToolStripMenuItem";
-            profileToolStripMenuItem.Size = new Size(53, 20);
-            profileToolStripMenuItem.Text = "Profile";
+            panelDisplay.Location = new Point(0, 27);
+            panelDisplay.Name = "panelDisplay";
+            panelDisplay.Size = new Size(800, 426);
+            panelDisplay.TabIndex = 1;
             // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(menuStrip1);
-            MainMenuStrip = menuStrip1;
+            Controls.Add(panelDisplay);
+            Controls.Add(menuHome);
+            MainMenuStrip = menuHome;
             Name = "HomeForm";
             Text = "Brave Hero Cooperation";
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            menuHome.ResumeLayout(false);
+            menuHome.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private MenuStrip menuStrip1;
+        private MenuStrip menuHome;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem loanToolStripMenuItem;
         private ToolStripMenuItem savingToolStripMenuItem;
@@ -158,5 +168,6 @@
         private ToolStripMenuItem acrossCooperationToolStripMenuItem;
         private ToolStripMenuItem exchangeToolStripMenuItem;
         private ToolStripMenuItem profileToolStripMenuItem;
+        private Panel panelDisplay;
     }
 }

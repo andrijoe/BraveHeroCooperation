@@ -7,18 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BraveHeroCooperation.Models;
 
 namespace BraveHeroCooperation.Forms
 {
-    public partial class AdminForm : Form
+    public partial class ForgotPasswordForm : Form
     {
-        Member loggedMember = null;
-        public AdminForm(Member member)
+        public ForgotPasswordForm()
         {
-            loggedMember = member;
             InitializeComponent();
         }
 
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.ShowDialog();
+        }
     }
 }

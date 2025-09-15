@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BraveHeroCooperation.Models;
 
-namespace BraveHeroCooperation.Forms
+namespace BraveHeroCooperation.Forms.PublicMenus
 {
-    public partial class AdminForm : Form
+    public partial class DashboardControl : UserControl
     {
-        Member loggedMember = null;
-        public AdminForm(Member member)
+        Member loggedMember;
+        public DashboardControl(Member member)
         {
-            loggedMember = member;
+            this.loggedMember = member;
             InitializeComponent();
         }
 
+       
     }
 }

@@ -1,3 +1,4 @@
+
 namespace BraveHeroCooperation
 {
     public partial class MainForm : Form
