@@ -22,10 +22,11 @@ namespace BraveHeroCooperation
 
             // show login form
             using var login = new Forms.LoginForm();
-            if (login.ShowDialog() == DialogResult.OK)
+            login.ShowDialog();
+            /*if (login.ShowDialog() == DialogResult.OK)
             {
                 Application.Run(new Forms.HomeForm(login.LoggedInUser));
-            }
+            }*/
         }
     }
 }

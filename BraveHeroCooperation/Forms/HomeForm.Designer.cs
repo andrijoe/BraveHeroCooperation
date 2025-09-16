@@ -67,6 +67,7 @@
             dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
             dashboardToolStripMenuItem.Size = new Size(180, 22);
             dashboardToolStripMenuItem.Text = "Dashboard";
+            dashboardToolStripMenuItem.Click += dashboardToolStripMenuItem_Click;
             // 
             // definitionsToolStripMenuItem
             // 

@@ -41,6 +41,7 @@ namespace BraveHeroCooperation.Forms
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
             this.Close();
+            this.Hide();
         }
     }
 }

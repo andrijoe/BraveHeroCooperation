@@ -32,7 +32,7 @@ namespace BraveHeroCooperation.Forms
 
         private void definitionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            route(new TerminologiPage(loggedMember));
         }
 
         private void manualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,6 +56,12 @@ namespace BraveHeroCooperation.Forms
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
             this.Close();
+            this.Hide();
+        }
+
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            route(new DashboardControl(loggedMember));
         }
     }
 }
