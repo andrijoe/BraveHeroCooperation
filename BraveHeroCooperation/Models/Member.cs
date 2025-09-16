@@ -30,5 +30,6 @@ namespace BraveHeroCooperation.Models
         [Required, MaxLength(100)] public string quest2 { get; set; } = null!;
 
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
+        public ICollection<Access> Accesses { get; set; } = new List<Access>();
     }
 }

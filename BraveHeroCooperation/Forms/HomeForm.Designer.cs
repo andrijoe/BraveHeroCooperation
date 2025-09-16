@@ -65,21 +65,22 @@
             // dashboardToolStripMenuItem
             // 
             dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            dashboardToolStripMenuItem.Size = new Size(137, 22);
+            dashboardToolStripMenuItem.Size = new Size(180, 22);
             dashboardToolStripMenuItem.Text = "Dashboard";
             // 
             // definitionsToolStripMenuItem
             // 
             definitionsToolStripMenuItem.Name = "definitionsToolStripMenuItem";
-            definitionsToolStripMenuItem.Size = new Size(137, 22);
+            definitionsToolStripMenuItem.Size = new Size(180, 22);
             definitionsToolStripMenuItem.Text = "Terminologi";
             definitionsToolStripMenuItem.Click += definitionsToolStripMenuItem_Click;
             // 
             // logoutToolStripMenuItem
             // 
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            logoutToolStripMenuItem.Size = new Size(137, 22);
+            logoutToolStripMenuItem.Size = new Size(180, 22);
             logoutToolStripMenuItem.Text = "Logout";
+            logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
             // 
             // profileToolStripMenuItem
             // 
@@ -147,6 +148,7 @@
             MainMenuStrip = menuHome;
             Name = "HomeForm";
             Text = "Brave Hero Cooperation";
+            Load += HomeForm_Load;
             menuHome.ResumeLayout(false);
             menuHome.PerformLayout();
             ResumeLayout(false);

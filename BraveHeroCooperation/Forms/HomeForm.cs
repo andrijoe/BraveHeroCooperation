@@ -23,7 +23,7 @@ namespace BraveHeroCooperation.Forms
             route(new DashboardControl(member));
         }
 
-        public void route(Control control)
+        public void route(System.Windows.Forms.Control control)
         {
             this.panelDisplay.Controls.Clear();
             this.panelDisplay.Dock = DockStyle.Fill;
@@ -45,6 +45,17 @@ namespace BraveHeroCooperation.Forms
 
         }
 
-        
+        private void HomeForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loggedMember = null;
+            LoginForm loginForm = new LoginForm();
+            loginForm.ShowDialog();
+            this.Close();
+        }
     }
 }

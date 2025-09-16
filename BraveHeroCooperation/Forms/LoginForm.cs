@@ -20,6 +20,7 @@ namespace BraveHeroCooperation.Forms
 
         private async void buttonSubmit_Click(object sender, EventArgs e)
         {
+            labelSuccess.Visible = false;
             using var db = new AppDbContext();
             var auth = new AuthService(db);
             var user = await auth.LoginAsync(textUsername.Text, textPassword.Text);
@@ -33,14 +34,25 @@ namespace BraveHeroCooperation.Forms
                     form.ShowDialog();
                 } else
                 {
-                    this.Hide();
-                    HomeForm form = new HomeForm(LoggedInUser);
-                    form.ShowDialog();
+                    AccessService accessService = new AccessService(db);
+                    Access access = await accessService.GetAccess(user.Id);
+                    if (access == null)
+                    {
+                        labelSuccess.Text = "Access Is Not Granted By Admin!";
+                        labelSuccess.ForeColor = Color.Red;
+                        labelSuccess.Visible = true;
+                    }
+                    else
+                    {
+                        this.Hide();
+                        HomeForm form = new HomeForm(LoggedInUser);
+                        form.ShowDialog();
+                    }
                 }       
             }
             else
             {
-                labelSuccess.Text = "Failed";
+                labelSuccess.Text = "Invalid Credentials";
                 labelSuccess.ForeColor = Color.Red;
                 labelSuccess.Visible = true;
             }

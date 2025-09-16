@@ -1,6 +1,6 @@
-﻿namespace BraveHeroCooperation.Forms.PublicMenus
+﻿namespace BraveHeroCooperation.Forms.AdminMenus
 {
-    partial class DashboardControl
+    partial class DashboardAdminControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,12 +30,12 @@
         {
             SuspendLayout();
             // 
-            // DashboardControl
+            // DashboardAdminControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "DashboardControl";
-            Size = new Size(341, 257);
+            Name = "DashboardAdminControl";
+            Load += DashboardAdminControl_Load;
             ResumeLayout(false);
         }
 

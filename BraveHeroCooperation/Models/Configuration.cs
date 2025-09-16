@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BraveHeroCooperation.Models
 {
-    internal class Configuration
+    public class Configuration
     {
-        public string terminologi1 { get; set; }
-        public string terminologi2 { get; set; }
-        public string terminologi3 { get; set; }
+        public int Id { get; set; }
+        [MaxLength(4000)] public string terminologi1 { get; set; }
+        [MaxLength(4000)] public string terminologi2 { get; set; }
+        [MaxLength(4000)] public string terminologi3 { get; set; }
         public decimal exchangeRate { get; set; }
         public decimal transferAcrossFee { get; set; }
         public decimal transferInhouseFee { get; set; }

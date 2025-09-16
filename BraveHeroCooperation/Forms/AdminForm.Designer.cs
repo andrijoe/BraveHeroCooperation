@@ -34,8 +34,9 @@
             logoutToolStripMenuItem = new ToolStripMenuItem();
             memberToolStripMenuItem = new ToolStripMenuItem();
             accessToolStripMenuItem = new ToolStripMenuItem();
-            acrossCooperationToolStripMenuItem = new ToolStripMenuItem();
             productToolStripMenuItem = new ToolStripMenuItem();
+            acrossCooperationToolStripMenuItem = new ToolStripMenuItem();
+            panelDisplay = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,12 +61,14 @@
             configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             configurationToolStripMenuItem.Size = new Size(180, 22);
             configurationToolStripMenuItem.Text = "Configuration";
+            configurationToolStripMenuItem.Click += configurationToolStripMenuItem_Click;
             // 
             // logoutToolStripMenuItem
             // 
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             logoutToolStripMenuItem.Size = new Size(180, 22);
             logoutToolStripMenuItem.Text = "Logout";
+            logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
             // 
             // memberToolStripMenuItem
             // 
@@ -78,12 +81,7 @@
             accessToolStripMenuItem.Name = "accessToolStripMenuItem";
             accessToolStripMenuItem.Size = new Size(55, 20);
             accessToolStripMenuItem.Text = "Access";
-            // 
-            // acrossCooperationToolStripMenuItem
-            // 
-            acrossCooperationToolStripMenuItem.Name = "acrossCooperationToolStripMenuItem";
-            acrossCooperationToolStripMenuItem.Size = new Size(123, 20);
-            acrossCooperationToolStripMenuItem.Text = "Across Cooperation";
+            accessToolStripMenuItem.Click += accessToolStripMenuItem_Click;
             // 
             // productToolStripMenuItem
             // 
@@ -91,15 +89,30 @@
             productToolStripMenuItem.Size = new Size(61, 20);
             productToolStripMenuItem.Text = "Product";
             // 
+            // acrossCooperationToolStripMenuItem
+            // 
+            acrossCooperationToolStripMenuItem.Name = "acrossCooperationToolStripMenuItem";
+            acrossCooperationToolStripMenuItem.Size = new Size(123, 20);
+            acrossCooperationToolStripMenuItem.Text = "Across Cooperation";
+            // 
+            // panelDisplay
+            // 
+            panelDisplay.Location = new Point(0, 27);
+            panelDisplay.Name = "panelDisplay";
+            panelDisplay.Size = new Size(800, 424);
+            panelDisplay.TabIndex = 1;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panelDisplay);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "AdminForm";
             Text = "Brave Hero Cooperation (Administrator)";
+            Load += AdminForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -116,5 +129,6 @@
         private ToolStripMenuItem accessToolStripMenuItem;
         private ToolStripMenuItem acrossCooperationToolStripMenuItem;
         private ToolStripMenuItem productToolStripMenuItem;
+        private Panel panelDisplay;
     }
 }

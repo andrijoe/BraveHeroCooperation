@@ -66,9 +66,12 @@ namespace BraveHeroCooperation.Services
                 var hash = BCrypt.Net.BCrypt.HashPassword(password);
                 user.PasswordHash = hash;
                 _db.Members.Update(user);
+                await _db.SaveChangesAsync();
                 return password;
             }
             return "";
         }
+
+        
     }
 }

@@ -3,10 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BraveHeroCooperation.Data;
+using BraveHeroCooperation.Models;
 
 namespace BraveHeroCooperation.Services
 {
-    internal class MemberService
+    public class MemberService
     {
+        private readonly AppDbContext _db;
+        public MemberService(AppDbContext db) => _db = db;
+        public List<object> setDropdown()
+        {
+            var list = _db.Members.OrderBy(m => m.FullName)
+                .Select(m => new
+                {
+                    m.Id,
+                    DisplayName = m.MemberId + " - " + m.FullName
+                })
+                .ToList<object>();
+            return list;
+        }
+
+        public Member? findById(int id)
+        {
+            return _db.Members.FirstOrDefault(x => x.Id == id);
+        }
     }
 }
