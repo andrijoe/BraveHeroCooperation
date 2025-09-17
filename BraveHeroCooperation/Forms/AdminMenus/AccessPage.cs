@@ -145,9 +145,9 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     {                      
                         if (accessList[i].Trim() == "Grant All")
                             listBoxAccess.SetItemChecked(0, true);
-                        if (accessList[i].Trim() == "Loan - Installment")
+                        if (accessList[i].Trim() == "Loan")
                             listBoxAccess.SetItemChecked(1, true);
-                        if (accessList[i].Trim() == "Saving - Withdrawal")
+                        if (accessList[i].Trim() == "Saving")
                             listBoxAccess.SetItemChecked(2, true);
                         if (accessList[i].Trim() == "Transfer - Inhouse")
                             listBoxAccess.SetItemChecked(3, true);

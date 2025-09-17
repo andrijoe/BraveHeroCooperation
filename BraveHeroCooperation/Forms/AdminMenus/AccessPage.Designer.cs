@@ -126,7 +126,7 @@
             // listBoxAccess
             // 
             listBoxAccess.FormattingEnabled = true;
-            listBoxAccess.Items.AddRange(new object[] { "Grant All", "Loan - Installment", "Saving - Withdrawal", "Transfer - Inhouse", "Transfer - Accross", "Exchange" });
+            listBoxAccess.Items.AddRange(new object[] { "Grant All", "Loan", "Saving", "Transfer - Inhouse", "Transfer - Accross", "Exchange" });
             listBoxAccess.Location = new Point(3, 67);
             listBoxAccess.Name = "listBoxAccess";
             listBoxAccess.Size = new Size(256, 112);

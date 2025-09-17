@@ -56,6 +56,7 @@
             // 
             // fileToolStripMenuItem
             // 
+            fileToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { dashboardToolStripMenuItem, definitionsToolStripMenuItem, logoutToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
@@ -64,6 +65,7 @@
             // 
             // dashboardToolStripMenuItem
             // 
+            dashboardToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
             dashboardToolStripMenuItem.Size = new Size(180, 22);
             dashboardToolStripMenuItem.Text = "Dashboard";
@@ -111,13 +113,13 @@
             // inhouseToolStripMenuItem
             // 
             inhouseToolStripMenuItem.Name = "inhouseToolStripMenuItem";
-            inhouseToolStripMenuItem.Size = new Size(178, 22);
+            inhouseToolStripMenuItem.Size = new Size(180, 22);
             inhouseToolStripMenuItem.Text = "Inhouse";
             // 
             // acrossCooperationToolStripMenuItem
             // 
             acrossCooperationToolStripMenuItem.Name = "acrossCooperationToolStripMenuItem";
-            acrossCooperationToolStripMenuItem.Size = new Size(178, 22);
+            acrossCooperationToolStripMenuItem.Size = new Size(180, 22);
             acrossCooperationToolStripMenuItem.Text = "Across Cooperation";
             // 
             // exchangeToolStripMenuItem
