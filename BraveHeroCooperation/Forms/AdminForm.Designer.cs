@@ -75,6 +75,7 @@
             memberToolStripMenuItem.Name = "memberToolStripMenuItem";
             memberToolStripMenuItem.Size = new Size(64, 20);
             memberToolStripMenuItem.Text = "Member";
+            memberToolStripMenuItem.Click += memberToolStripMenuItem_Click;
             // 
             // accessToolStripMenuItem
             // 

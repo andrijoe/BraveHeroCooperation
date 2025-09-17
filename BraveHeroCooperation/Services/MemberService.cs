@@ -28,5 +28,17 @@ namespace BraveHeroCooperation.Services
         {
             return _db.Members.FirstOrDefault(x => x.Id == id);
         }
+
+        public object setGrid()
+        {
+            return 
+                _db.Members.OrderByDescending(m=> m.ModDate).ToList();
+        }
+
+        public async void update(Member member)
+        {
+            _db.Members.Update(member);
+            await _db.SaveChangesAsync();
+        }
     }
 }

@@ -15,8 +15,8 @@ namespace BraveHeroCooperation.Forms.PublicMenus
 {
     public partial class TerminologiPage : UserControl
     {
-        private Member loggedMember;
-        public TerminologiPage(Member member)
+        private Member? loggedMember;
+        public TerminologiPage(Member? member)
         {
             loggedMember = member;
             InitializeComponent();

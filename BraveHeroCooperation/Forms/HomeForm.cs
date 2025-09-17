@@ -7,7 +7,7 @@ namespace BraveHeroCooperation.Forms
 {
     public partial class HomeForm : Form
     {
-        Member loggedMember;
+        Member? loggedMember;
         public HomeForm(Member member)
         {
             loggedMember = member;
@@ -31,6 +31,13 @@ namespace BraveHeroCooperation.Forms
             exchangeToolStripMenuItem.Enabled = false;
             inhouseToolStripMenuItem.Enabled = false;
             acrossCooperationToolStripMenuItem.Enabled = false;
+
+            loanToolStripMenuItem.ToolTipText = "Disabled";
+            savingToolStripMenuItem.ToolTipText = "Disabled";
+            transferToolStripMenuItem.ToolTipText = "Disabled";
+            exchangeToolStripMenuItem.ToolTipText = "Disabled";
+            inhouseToolStripMenuItem.ToolTipText = "Disabled";
+            acrossCooperationToolStripMenuItem.ToolTipText = "Disabled";
         }
 
         public void grantAllMenu()
@@ -74,13 +81,17 @@ namespace BraveHeroCooperation.Forms
                         if (menu.Text != null && menu.Text.Contains(accessSegment))
                         {
                             menu.Enabled = true;
+                            menu.ToolTipText = "";
                         }
                         else
                         {
                             foreach (ToolStripMenuItem submenu in menu.DropDownItems)
                             {
                                 if (submenu.Text != null && submenu.Text.Contains(accessSegment))
+                                {
                                     submenu.Enabled = true;
+                                    submenu.ToolTipText = "";
+                                }
                             }
                         }
                     }                    
@@ -112,10 +123,9 @@ namespace BraveHeroCooperation.Forms
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             loggedMember = null;
+            this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
-            this.Close();
-            this.Hide();
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)

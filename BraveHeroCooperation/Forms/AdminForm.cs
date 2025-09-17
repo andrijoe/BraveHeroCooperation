@@ -10,7 +10,7 @@ namespace BraveHeroCooperation.Forms
         {
             loggedMember = member;
             InitializeComponent();
-            
+
         }
 
         public void route(System.Windows.Forms.Control control)
@@ -38,10 +38,14 @@ namespace BraveHeroCooperation.Forms
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             loggedMember = null;
+            this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
-            this.Close();
-            this.Hide();
+        }
+
+        private void memberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            route(new MemberPage());
         }
     }
 }
