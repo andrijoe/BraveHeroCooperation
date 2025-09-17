@@ -31,5 +31,10 @@ namespace BraveHeroCooperation.Models
 
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
         public ICollection<Access> Accesses { get; set; } = new List<Access>();
+        public ICollection<Saving> Savings { get; set; } = new List<Saving>();
+        public ICollection<Inhouse> OriginTransactions { get; set; }
+        public ICollection<Inhouse> DestinationTransactions { get; set; }
+
+        public ICollection<Exchange> Exchanges { get; set; }
     }
 }

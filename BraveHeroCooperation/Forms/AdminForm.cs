@@ -10,7 +10,8 @@ namespace BraveHeroCooperation.Forms
         {
             loggedMember = member;
             InitializeComponent();
-
+            this.Text = "Brave Hero Cooperation (Administrator: " +
+                loggedMember.MemberId + " - " + loggedMember.FullName + ")";
         }
 
         public void route(System.Windows.Forms.Control control)
@@ -22,7 +23,7 @@ namespace BraveHeroCooperation.Forms
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            route(new DashboardAdminControl(loggedMember));
+            route(new DashboardAdminPage(loggedMember));
         }
 
         private void accessToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,6 +47,16 @@ namespace BraveHeroCooperation.Forms
         private void memberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             route(new MemberPage());
+        }
+
+        private void productToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            route(new ProductPage());
+        }
+
+        private void acrossCooperationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            route(new AcrossPage());
         }
     }
 }

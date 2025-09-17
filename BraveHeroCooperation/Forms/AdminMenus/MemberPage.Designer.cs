@@ -245,7 +245,8 @@
             dataGridViewMember.ReadOnly = true;
             dataGridViewMember.Size = new Size(389, 291);
             dataGridViewMember.TabIndex = 32;
-            dataGridViewMember.CellContentClick += dataGridViewMember_CellContentClick;
+            dataGridViewMember.CellClick += dataGridViewMember_CellClick;
+            
             // 
             // idDataGridViewTextBoxColumn
             // 

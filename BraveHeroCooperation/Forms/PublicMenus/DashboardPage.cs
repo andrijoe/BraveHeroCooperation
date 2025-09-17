@@ -7,17 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Models;
 
 namespace BraveHeroCooperation.Forms.PublicMenus
 {
-    public partial class DashboardControl : UserControl
+    public partial class DashboardPage : UserControl
     {
         private Member loggedMember;
-        public DashboardControl(Member member)
+        public DashboardPage(Member member)
         {
             loggedMember = member;
             InitializeComponent();
+        }
+
+        private void DashboardPage_Load(object sender, EventArgs e)
+        {
+            AppDbContext db = new AppDbContext();
+
         }
     }
 }

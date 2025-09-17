@@ -11,10 +11,10 @@ using BraveHeroCooperation.Models;
 
 namespace BraveHeroCooperation.Forms.AdminMenus
 {
-    public partial class DashboardAdminControl : UserControl
+    public partial class DashboardAdminPage : UserControl
     {
         private Member? loggedMember;
-        public DashboardAdminControl(Member? member )
+        public DashboardAdminPage(Member? member )
         {
             loggedMember = member;
             InitializeComponent();

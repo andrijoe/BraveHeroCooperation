@@ -3,6 +3,7 @@ using System;
 using BraveHeroCooperation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BraveHeroCooperation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250917103642_Update3")]
+    partial class Update3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,9 +293,6 @@ namespace BraveHeroCooperation.Migrations
                     b.Property<int>("Tenor")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UpdateOn")
-                        .HasColumnType("timestamp with time zone");
-
                     b.HasKey("Id");
 
                     b.ToTable("LoanMasters");
@@ -464,9 +464,6 @@ namespace BraveHeroCooperation.Migrations
 
                     b.Property<int>("Tenor")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime>("UpdateOn")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

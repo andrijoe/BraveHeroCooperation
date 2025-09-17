@@ -19,6 +19,11 @@ namespace BraveHeroCooperation.Models
         public int tenorLeft { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [Required, MaxLength(20)] public string Status { get; set; } = "Pending";
+        public decimal Interest { get; set; }
+        public decimal InterestFine { get; set; }
+        public decimal Tenor { get; set; }
+        public int DueDate { get; set; }
+        [Required] public decimal totalAmount { get; set; }
 
         public string? KtpPath { get; set; }
         public string? KkPath { get; set; }

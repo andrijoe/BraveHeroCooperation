@@ -11,38 +11,6 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             InitializeComponent();
         }
 
-        private void dataGridViewMember_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                int memberId = int.Parse(dataGridViewMember.Rows[e.RowIndex].Cells[0].Value.ToString());
-                AppDbContext db = new AppDbContext();
-                MemberService service = new MemberService(db);
-                Member? member = service.findById(memberId);
-                if (member != null)
-                {
-                    labelFullName.Text = member.FullName;
-                    labelEmail.Text = member.Email;
-                    labelPhone.Text = member.Phone;
-                    labelPhoneAlt.Text = member.PhoneAlt;
-                    labelAddress.Text = member.Address;
-                    labelJoinDate.Text = member.JoinDate.ToString("f");
-                    labelMemberId.Text = member.MemberId;
-                    labelCardId.Text = member.IdCard;
-                    labelId.Text = member.Id.ToString();
-                    if (member.IsActive)
-                        comboStatus.SelectedIndex = 0;
-                    else
-                        comboStatus.SelectedIndex = 1;
-
-                    buttonUpdate.Visible = true;
-                } else
-                {
-                    buttonUpdate.Visible = false;
-                }
-            }
-        }
-
         private void MemberPage_Load(object sender, EventArgs e)
         {
             loadGridMember();
@@ -83,6 +51,39 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                 service.update(member);
             }
             loadGridMember();
+        }
+
+        private void dataGridViewMember_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int memberId = int.Parse(dataGridViewMember.Rows[e.RowIndex].Cells[0].Value.ToString());
+                AppDbContext db = new AppDbContext();
+                MemberService service = new MemberService(db);
+                Member? member = service.findById(memberId);
+                if (member != null)
+                {
+                    labelFullName.Text = member.FullName;
+                    labelEmail.Text = member.Email;
+                    labelPhone.Text = member.Phone;
+                    labelPhoneAlt.Text = member.PhoneAlt;
+                    labelAddress.Text = member.Address;
+                    labelJoinDate.Text = member.JoinDate.ToString("f");
+                    labelMemberId.Text = member.MemberId;
+                    labelCardId.Text = member.IdCard;
+                    labelId.Text = member.Id.ToString();
+                    if (member.IsActive)
+                        comboStatus.SelectedIndex = 0;
+                    else
+                        comboStatus.SelectedIndex = 1;
+
+                    buttonUpdate.Visible = true;
+                }
+                else
+                {
+                    buttonUpdate.Visible = false;
+                }
+            }
         }
     }
 }

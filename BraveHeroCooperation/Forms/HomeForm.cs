@@ -1,4 +1,5 @@
 ﻿using BraveHeroCooperation.Data;
+using BraveHeroCooperation.Forms.MemberMenus;
 using BraveHeroCooperation.Forms.PublicMenus;
 using BraveHeroCooperation.Models;
 using BraveHeroCooperation.Services;
@@ -7,13 +8,15 @@ namespace BraveHeroCooperation.Forms
 {
     public partial class HomeForm : Form
     {
-        Member? loggedMember;
+        Member loggedMember;
+        string title;
         public HomeForm(Member member)
         {
             loggedMember = member;
             InitializeComponent();
             this.Text = this.Text + " - User: " + loggedMember.FullName + " (" + loggedMember.MemberId + ")";
-            route(new DashboardControl(member));
+            title = this.Text;
+            route(new DashboardPage(member));
         }
 
         public void route(System.Windows.Forms.Control control)
@@ -58,8 +61,9 @@ namespace BraveHeroCooperation.Forms
             if (access != null)
             {
                 var listAccess = access.AccessList.Split(",");
-                                
-                for (int i = 0; i < listAccess.Length; i++) {
+
+                for (int i = 0; i < listAccess.Length; i++)
+                {
                     var accessName = listAccess[i];
                     var accessSegment = accessName.Trim();
 
@@ -94,7 +98,7 @@ namespace BraveHeroCooperation.Forms
                                 }
                             }
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -130,7 +134,20 @@ namespace BraveHeroCooperation.Forms
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            route(new DashboardControl(loggedMember));
+            this.Text = title;
+            route(new DashboardPage(loggedMember));
+        }
+
+        private void profileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Text = title + " << Profile Page >>";
+            route(new ProfilePage(loggedMember));
+        }
+
+        private void loanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Text = title + " << Loan Page >>";
+            route(new LoanPage(loggedMember));
         }
     }
 }
