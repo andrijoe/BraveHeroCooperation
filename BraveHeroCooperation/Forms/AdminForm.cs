@@ -58,5 +58,10 @@ namespace BraveHeroCooperation.Forms
         {
             route(new AcrossPage());
         }
+
+        private void approvalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            route(new ApprovalPage(loggedMember));
+        }
     }
 }

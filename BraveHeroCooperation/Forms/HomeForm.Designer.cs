@@ -153,6 +153,7 @@
             MainMenuStrip = menuHome;
             Name = "HomeForm";
             Text = "Brave Hero Cooperation";
+            WindowState = FormWindowState.Maximized;
             Load += HomeForm_Load;
             menuHome.ResumeLayout(false);
             menuHome.PerformLayout();

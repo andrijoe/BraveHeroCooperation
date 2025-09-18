@@ -181,7 +181,7 @@
             // comboMode
             // 
             comboMode.FormattingEnabled = true;
-            comboMode.Items.AddRange(new object[] { "Loan", "Saving" });
+            comboMode.Items.AddRange(new object[] { "--Choose--", "Loan", "Saving" });
             comboMode.Location = new Point(203, 35);
             comboMode.Name = "comboMode";
             comboMode.Size = new Size(185, 23);
@@ -330,7 +330,6 @@
             label9.Size = new Size(72, 15);
             label9.TabIndex = 21;
             label9.Text = "Master Loan";
-            label9.Visible = false;
             // 
             // label10
             // 
@@ -340,7 +339,6 @@
             label10.Size = new Size(81, 15);
             label10.TabIndex = 22;
             label10.Text = "Master Saving";
-            label10.Visible = false;
             // 
             // ProductPage
             // 

@@ -90,5 +90,25 @@ namespace BraveHeroCooperation.Services
         {
             return await _db.SavingMasters.FirstOrDefaultAsync(lm => lm.Id == id);
         }
+
+        public object SetDropDownLoan()
+        {
+            var data = _db.LoanMasters.OrderBy(x=> x.Name)
+                .Select( x=> new
+                {
+                    x.Id,
+                    DisplayName = x.Name + ", t:" + x.Tenor + "(" +x.Interest + ")"
+                }).ToList();
+
+            var result = new List<object>
+            {
+                new { Id = 0, DisplayName = "--choose--" }
+            };
+
+            // Gabungkan data asli
+            result.AddRange(data);
+
+            return result;
+        }
     }
 }

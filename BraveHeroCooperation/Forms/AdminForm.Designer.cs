@@ -37,12 +37,13 @@
             productToolStripMenuItem = new ToolStripMenuItem();
             acrossCooperationToolStripMenuItem = new ToolStripMenuItem();
             panelDisplay = new Panel();
+            approvalToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, memberToolStripMenuItem, accessToolStripMenuItem, productToolStripMenuItem, acrossCooperationToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, memberToolStripMenuItem, accessToolStripMenuItem, productToolStripMenuItem, approvalToolStripMenuItem, acrossCooperationToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -105,6 +106,13 @@
             panelDisplay.Size = new Size(800, 424);
             panelDisplay.TabIndex = 1;
             // 
+            // approvalToolStripMenuItem
+            // 
+            approvalToolStripMenuItem.Name = "approvalToolStripMenuItem";
+            approvalToolStripMenuItem.Size = new Size(67, 20);
+            approvalToolStripMenuItem.Text = "Approval";
+            approvalToolStripMenuItem.Click += approvalToolStripMenuItem_Click;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -133,5 +141,6 @@
         private ToolStripMenuItem acrossCooperationToolStripMenuItem;
         private ToolStripMenuItem productToolStripMenuItem;
         private Panel panelDisplay;
+        private ToolStripMenuItem approvalToolStripMenuItem;
     }
 }

@@ -15,18 +15,27 @@ namespace BraveHeroCooperation
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new MainForm());
-            using (var db = new AppDbContext())
-            {
-                db.Database.Migrate();
-            }
 
-            // show login form
-            using var login = new Forms.LoginForm();
-            login.ShowDialog();
-            /*if (login.ShowDialog() == DialogResult.OK)
+            try
             {
-                Application.Run(new Forms.HomeForm(login.LoggedInUser));
-            }*/
+                using (var db = new AppDbContext())
+                {
+                    db.Database.Migrate();
+                }
+
+                // show login form
+                using var login = new Forms.LoginForm();
+                login.ShowDialog();
+                /*if (login.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new Forms.HomeForm(login.LoggedInUser));
+                }*/
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Database Connection failed!\nPlease Check Your Network.\nCode:" + ex.Message,
+                    "Database Connection ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

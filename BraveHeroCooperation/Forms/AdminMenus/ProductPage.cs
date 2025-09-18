@@ -73,6 +73,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             textMinAmount.Text = "";
             textTenor.Text = "";
             comboMode.SelectedIndex = 0;
+            buttonSubmit.Enabled = true;
         }
 
         private async void dataGridViewLoan_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -93,7 +94,8 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     textMaxAmount.Text = loanMaster.MaxAmount.ToString();
                     textMinAmount.Text = loanMaster.MinAmount.ToString();
                     textTenor.Text = loanMaster.Tenor.ToString();
-                    comboMode.SelectedIndex = 0;
+                    comboMode.SelectedIndex = 1;
+                    buttonSubmit.Enabled = false;
                 }
             }
         }
@@ -116,9 +118,10 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     textMaxAmount.Text = savingMaster.MaxAmount.ToString();
                     textMinAmount.Text = savingMaster.MinAmount.ToString();
                     textTenor.Text = savingMaster.Tenor.ToString();
-                    comboMode.SelectedIndex = 1;
+                    comboMode.SelectedIndex = 2;
+                    buttonSubmit.Enabled = false;
                 }
             }
-        }
+        }  
     }
 }
