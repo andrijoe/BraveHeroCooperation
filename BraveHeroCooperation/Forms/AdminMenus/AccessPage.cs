@@ -21,7 +21,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             AccessService accessService = new AccessService(db);
             string accessList = string.Join(", ", listBoxAccess.CheckedItems.Cast<string>());
             int id = comboMember.SelectedValue as int? ?? 0;
-            Member? member = id != 0 ? memberService.findById(id) : null;
+            Member? member = id != 0 ? memberService.FindById(id) : null;
             if (member != null)
             {
                 Access? access = accessService.findByMember(member.Id);
@@ -85,7 +85,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
         private void loadMember(AppDbContext db)
         {
             var memberService = new MemberService(db);
-            memberBindingSource.DataSource = memberService.setDropdown();
+            memberBindingSource.DataSource = memberService.SetDropdown();
             comboMember.DisplayMember = "DisplayName";
             comboMember.ValueMember = "Id";
         }
@@ -108,7 +108,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             AppDbContext db = new AppDbContext();
             MemberService memberService = new MemberService(db);
             int id = comboMember.SelectedValue as int? ?? 0;
-            Member? member = id != 0 ? memberService.findById(id) : null;
+            Member? member = id != 0 ? memberService.FindById(id) : null;
             if (member != null)
             {
                 labelFullName.Text = member.FullName;

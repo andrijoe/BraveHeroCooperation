@@ -36,6 +36,7 @@
             LoanId = new DataGridViewTextBoxColumn();
             outstanding = new DataGridViewTextBoxColumn();
             tenorLeft = new DataGridViewTextBoxColumn();
+            Fine = new DataGridViewTextBoxColumn();
             loanBindingSource = new BindingSource(components);
             loanMasterBindingSource = new BindingSource(components);
             label1 = new Label();
@@ -74,6 +75,7 @@
             textMinAmount = new TextBox();
             label13 = new Label();
             textMaxAmount = new TextBox();
+            buttonReload = new Button();
             ((System.ComponentModel.ISupportInitialize)installmentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)loanBindingSource).BeginInit();
@@ -97,12 +99,12 @@
             dataGridViewLoan.AllowUserToDeleteRows = false;
             dataGridViewLoan.AutoGenerateColumns = false;
             dataGridViewLoan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewLoan.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, LoanId, outstanding, tenorLeft });
+            dataGridViewLoan.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, LoanId, outstanding, tenorLeft, Fine });
             dataGridViewLoan.DataSource = loanBindingSource;
             dataGridViewLoan.Location = new Point(464, 42);
             dataGridViewLoan.Name = "dataGridViewLoan";
             dataGridViewLoan.ReadOnly = true;
-            dataGridViewLoan.Size = new Size(328, 337);
+            dataGridViewLoan.Size = new Size(491, 337);
             dataGridViewLoan.TabIndex = 2;
             dataGridViewLoan.CellClick += dataGridViewLoan_CellClick;
             // 
@@ -133,6 +135,13 @@
             tenorLeft.HeaderText = "tenorLeft";
             tenorLeft.Name = "tenorLeft";
             tenorLeft.ReadOnly = true;
+            // 
+            // Fine
+            // 
+            Fine.DataPropertyName = "Fine";
+            Fine.HeaderText = "Fine";
+            Fine.Name = "Fine";
+            Fine.ReadOnly = true;
             // 
             // loanBindingSource
             // 
@@ -452,10 +461,21 @@
             textMaxAmount.Size = new Size(204, 23);
             textMaxAmount.TabIndex = 39;
             // 
+            // buttonReload
+            // 
+            buttonReload.Location = new Point(646, 400);
+            buttonReload.Name = "buttonReload";
+            buttonReload.Size = new Size(125, 23);
+            buttonReload.TabIndex = 43;
+            buttonReload.Text = "Reload";
+            buttonReload.UseVisualStyleBackColor = true;
+            buttonReload.Click += buttonReload_Click;
+            // 
             // LoanPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(buttonReload);
             Controls.Add(label12);
             Controls.Add(textMinAmount);
             Controls.Add(label13);
@@ -494,7 +514,7 @@
             Controls.Add(dataGridViewLoan);
             Controls.Add(textAmount);
             Name = "LoanPage";
-            Size = new Size(795, 442);
+            Size = new Size(976, 442);
             Load += LoanPage_Load;
             ((System.ComponentModel.ISupportInitialize)installmentBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoan).EndInit();
@@ -539,10 +559,6 @@
         private Label labelId;
         private BindingSource installmentBindingSource;
         private BindingSource loanBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn LoanId;
-        private DataGridViewTextBoxColumn outstanding;
-        private DataGridViewTextBoxColumn tenorLeft;
         private Label labelLoanID;
         private TextBox textLoanId;
         private Label label11;
@@ -551,5 +567,11 @@
         private TextBox textMinAmount;
         private Label label13;
         private TextBox textMaxAmount;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn LoanId;
+        private DataGridViewTextBoxColumn outstanding;
+        private DataGridViewTextBoxColumn tenorLeft;
+        private DataGridViewTextBoxColumn Fine;
+        private Button buttonReload;
     }
 }

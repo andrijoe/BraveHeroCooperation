@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Forms;
 using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Models;
 using BraveHeroCooperation.Services;
+using BraveHeroCooperation.Utils;
 
 namespace BraveHeroCooperation.Forms.PublicMenus
 {
@@ -41,6 +43,7 @@ namespace BraveHeroCooperation.Forms.PublicMenus
                 Loan? loan = await loanService.findById(this._IdLoan);
                 if (loan != null)
                 {
+                    textLoanId.Text = loan.LoanId.ToString();
                     installmentBindingSource.DataSource = await loanService.LoadInstallmentsGrid(this._IdLoan);
                     dataGridViewInstallment.Columns[0].DataPropertyName = "Id";
                     dataGridViewInstallment.Columns[1].DataPropertyName = "amount";
@@ -60,6 +63,34 @@ namespace BraveHeroCooperation.Forms.PublicMenus
         private async void InstallmentForm_Load(object sender, EventArgs e)
         {
             LoadInstallment();
+        }
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            textAmount.Text = "";
+            textPath.Text = "";
+
+        }
+
+        private async void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            AppDbContext db = new AppDbContext();
+            LoanService loanService = new LoanService(db);
+            await loanService.saveOrUpdateInstallment(_IdLoan, textAmount.Text, textPath.Text);
+            await loanService.recalculateLoan(_IdLoan, textAmount.Text);
+            LoadInstallment();
+        }
+
+        private void buttonReceipt_Click(object sender, EventArgs e)
+        {
+            textPath.Text = FileHelper.UploadDocument("Receipt");
+
+        }
+
+        private void dataGridViewInstallment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+                FileHelper.ShowFile(dataGridViewInstallment.Rows[e.RowIndex].Cells[3].Value.ToString());
         }
     }
 }

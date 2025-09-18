@@ -42,7 +42,7 @@
             textAmount = new TextBox();
             label3 = new Label();
             textPath = new TextBox();
-            button1 = new Button();
+            buttonNew = new Button();
             buttonReceipt = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewInstallment).BeginInit();
             ((System.ComponentModel.ISupportInitialize)installmentBindingSource).BeginInit();
@@ -56,6 +56,7 @@
             buttonSubmit.TabIndex = 30;
             buttonSubmit.Text = "Submit";
             buttonSubmit.UseVisualStyleBackColor = true;
+            buttonSubmit.Click += buttonSubmit_Click;
             // 
             // dataGridViewInstallment
             // 
@@ -70,6 +71,7 @@
             dataGridViewInstallment.ReadOnly = true;
             dataGridViewInstallment.Size = new Size(291, 390);
             dataGridViewInstallment.TabIndex = 29;
+            dataGridViewInstallment.CellClick += dataGridViewInstallment_CellClick;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -149,17 +151,19 @@
             // 
             textPath.Location = new Point(312, 141);
             textPath.Name = "textPath";
+            textPath.ReadOnly = true;
             textPath.Size = new Size(212, 23);
             textPath.TabIndex = 35;
             // 
-            // button1
+            // buttonNew
             // 
-            button1.Location = new Point(412, 240);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 23);
-            button1.TabIndex = 37;
-            button1.Text = "New Installment";
-            button1.UseVisualStyleBackColor = true;
+            buttonNew.Location = new Point(412, 240);
+            buttonNew.Name = "buttonNew";
+            buttonNew.Size = new Size(112, 23);
+            buttonNew.TabIndex = 37;
+            buttonNew.Text = "New Installment";
+            buttonNew.UseVisualStyleBackColor = true;
+            buttonNew.Click += buttonNew_Click;
             // 
             // buttonReceipt
             // 
@@ -169,6 +173,7 @@
             buttonReceipt.TabIndex = 38;
             buttonReceipt.Text = "Browse";
             buttonReceipt.UseVisualStyleBackColor = true;
+            buttonReceipt.Click += buttonReceipt_Click;
             // 
             // InstallmentForm
             // 
@@ -177,7 +182,7 @@
             ClientSize = new Size(541, 406);
             ControlBox = false;
             Controls.Add(buttonReceipt);
-            Controls.Add(button1);
+            Controls.Add(buttonNew);
             Controls.Add(label3);
             Controls.Add(textPath);
             Controls.Add(label2);
@@ -210,7 +215,7 @@
         private TextBox textAmount;
         private Label label3;
         private TextBox textPath;
-        private Button button1;
+        private Button buttonNew;
         private Button buttonReceipt;
     }
 }

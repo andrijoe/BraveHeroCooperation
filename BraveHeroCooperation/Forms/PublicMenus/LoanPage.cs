@@ -3,6 +3,7 @@ using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Forms.PublicMenus;
 using BraveHeroCooperation.Models;
 using BraveHeroCooperation.Services;
+using BraveHeroCooperation.Utils;
 
 namespace BraveHeroCooperation.Forms.MemberMenus
 {
@@ -18,41 +19,17 @@ namespace BraveHeroCooperation.Forms.MemberMenus
 
         private void buttonFileKTP_Click(object sender, EventArgs e)
         {
-            textDocKtp.Text = UploadDocument("KTP");
-        }
-
-        private String UploadDocument(String title)
-        {
-            string path = "";
-            using var ofd = new OpenFileDialog
-            {
-                Title = "Choose File " + title,
-                Filter = "Image/PDF|*.jpg;*.jpeg;*.png;*.pdf"
-            };
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                // Simpan file ke folder aplikasi (atau folder server khusus)
-                var targetFolder = Path.Combine(AppContext.BaseDirectory, "Uploads");
-                Directory.CreateDirectory(targetFolder);
-
-                var fileName = Path.GetFileName(ofd.FileName);
-                var destPath = Path.Combine(targetFolder, fileName);
-                File.Copy(ofd.FileName, destPath, true);
-
-                path = destPath; // tampilkan path
-            }
-            return path;
+            textDocKtp.Text = FileHelper.UploadDocument("KTP");
         }
 
         private void buttonFileKK_Click(object sender, EventArgs e)
         {
-            textDocKK.Text = UploadDocument("KK");
+            textDocKK.Text = FileHelper.UploadDocument("KK");
         }
 
         private void buttonFileSlip_Click(object sender, EventArgs e)
         {
-            textDocSlip.Text = UploadDocument("Slip Gaji");
+            textDocSlip.Text = FileHelper.UploadDocument("Slip Gaji");
         }
 
         private void LoanPage_Load(object sender, EventArgs e)
@@ -196,8 +173,8 @@ namespace BraveHeroCooperation.Forms.MemberMenus
             }
             else
             {
-                await loanService.saveOrUpdate(loggedMember, textAmount.Text, 
-                    textDocKK.Text, textDocKtp.Text, textDocSlip.Text, textDueDate.Text, 
+                await loanService.saveOrUpdate(loggedMember, textAmount.Text,
+                    textDocKK.Text, textDocKtp.Text, textDocSlip.Text, textDueDate.Text,
                     textInterest.Text, textInterestFine.Text, textLoanId.Text,
                     textTenor.Text, textAdminFee.Text);
                 LoadLoanGrid(db);
@@ -228,7 +205,7 @@ namespace BraveHeroCooperation.Forms.MemberMenus
             if (comboLoanMaster.SelectedIndex == 0)
                 ResetDropDown();
 
-            if (comboLoanMaster.SelectedIndex > 0 )
+            if (comboLoanMaster.SelectedIndex > 0)
             {
                 int idLoanMaster = int.Parse(comboLoanMaster.SelectedValue.ToString());
                 AppDbContext db = new AppDbContext();
@@ -242,11 +219,24 @@ namespace BraveHeroCooperation.Forms.MemberMenus
                     textAdminFee.Text = loanMaster.AdminFee.ToString();
                     textMinAmount.Text = loanMaster.MinAmount.ToString();
                     textMaxAmount.Text = loanMaster.MaxAmount.ToString();
-                } else
+                }
+                else
                 {
-                   ResetDropDown();
+                    ResetDropDown();
                 }
             }
+        }
+
+        private void buttonReload_Click(object sender, EventArgs e)
+        {
+            AppDbContext db = new AppDbContext();
+
+            SetLoanDropDown(db);
+            SetDefaultField();
+            ResetField();
+
+            LoadLoanGrid(db);
+            HideInstallment();
         }
     }
 }

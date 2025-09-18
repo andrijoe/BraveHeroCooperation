@@ -1,6 +1,7 @@
 ﻿using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Models;
 using BraveHeroCooperation.Services;
+using BraveHeroCooperation.Utils;
 
 namespace BraveHeroCooperation.Forms.AdminMenus
 {
@@ -72,17 +73,17 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     if (e.ColumnIndex == 8)
                     {
                         path = dataGridViewApproval.Rows[e.RowIndex].Cells[8].Value.ToString();
-                        ShowFile(path);
+                        FileHelper.ShowFile(path);
                     }
                     else if (e.ColumnIndex == 9)
                     {
                         path = dataGridViewApproval.Rows[e.RowIndex].Cells[8].Value.ToString();
-                        ShowFile(path);
+                        FileHelper.ShowFile(path);
                     }
                     else if (e.ColumnIndex == 10)
                     {
                         path = dataGridViewApproval.Rows[e.RowIndex].Cells[8].Value.ToString();
-                        ShowFile(path);
+                        FileHelper.ShowFile(path);
                     }
                     else
                     {
@@ -102,41 +103,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             {
 
             }
-        }
-        private void ShowFile(string path)
-        {
-            // Ambil path dari TextBox
-            var filePath = path.Trim();
-
-            if (string.IsNullOrWhiteSpace(filePath))
-            {
-                MessageBox.Show("Path file kosong.", "Info",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!File.Exists(filePath))
-            {
-                MessageBox.Show("File tidak ditemukan:\n" + filePath, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            try
-            {
-                // Buka file dengan aplikasi default di Windows
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                {
-                    FileName = filePath,
-                    UseShellExecute = true   // Penting untuk Windows 10/11
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal membuka file:\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        }   
 
     }
 }

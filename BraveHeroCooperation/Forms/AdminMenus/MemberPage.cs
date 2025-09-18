@@ -25,7 +25,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
         {
             AppDbContext db = new AppDbContext();
             MemberService service = new MemberService(db);
-            memberBindingSource.DataSource = service.setGrid();
+            memberBindingSource.DataSource = service.SetGrid();
             dataGridViewMember.Columns[0].DataPropertyName = "Id";
             dataGridViewMember.Columns[0].Visible = false;
             dataGridViewMember.Columns[1].DataPropertyName = "MemberId";
@@ -39,7 +39,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             AppDbContext db = new AppDbContext();
             MemberService service = new MemberService(db);
             int memberId = int.Parse(labelId.Text);
-            Member? member = service.findById(memberId);
+            Member? member = service.FindById(memberId);
             if (member != null)
             {
                 if (comboStatus.SelectedIndex == 0)
@@ -48,7 +48,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     member.IsActive = false;
 
                 member.ModDate = DateTime.UtcNow;
-                service.update(member);
+                service.Update(member);
             }
             loadGridMember();
         }
@@ -60,7 +60,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                 int memberId = int.Parse(dataGridViewMember.Rows[e.RowIndex].Cells[0].Value.ToString());
                 AppDbContext db = new AppDbContext();
                 MemberService service = new MemberService(db);
-                Member? member = service.findById(memberId);
+                Member? member = service.FindById(memberId);
                 if (member != null)
                 {
                     labelFullName.Text = member.FullName;

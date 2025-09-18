@@ -53,13 +53,14 @@ namespace BraveHeroCooperation.Services
                 TenorLeft = tenorLeft,
                 MemberId = member.Id,
                 AdminFee = decimal.Parse(adminFee),
-                Outstanding = outstanding
+                Outstanding = outstanding,
+                TotalAmount = outstanding + decimal.Parse(adminFee)
             };
             _db.Loans.Add(l);
             await _db.SaveChangesAsync();
         }
 
-        public object LoadApproval()
+        /*public object LoadApproval()
         {
             return _db.Loans.Where(x => x.ApprovedOn == null)
                 .Include(x => x.Member)
@@ -80,7 +81,7 @@ namespace BraveHeroCooperation.Services
                     Slip = x.SlipGajiPath
                 })
                 .ToList();
-        }
+        }*/
 
         public async Task<List<Loan>> LoadsApproval()
         {
@@ -101,6 +102,45 @@ namespace BraveHeroCooperation.Services
                     l.IsApproved = true;
                 else
                     l.IsApproved = false;
+                _db.Loans.Update(l);
+                await _db.SaveChangesAsync();
+            }
+        }
+        public async Task saveOrUpdateInstallment(int loanId, string amount, string path)
+        {
+            Installment i = new Installment
+            {
+                LoanId = loanId,
+                amount = decimal.Parse(amount),
+                PaymentDate = DateTime.UtcNow,
+                ProofPath = path
+            };
+            _db.Installments.Add(i);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task recalculateLoan(int idLoan, string amount)
+        {
+            decimal payment = decimal.Parse(amount);
+            int todaysDate = DateTime.UtcNow.Day;
+            Loan? l = await _db.Loans.FirstOrDefaultAsync(x=> x.Id == idLoan);
+            if (l != null)
+            {
+                if (todaysDate > l.DueDate)
+                {
+                    l.Fine = (l.Amount * l.InterestFine) + l.Fine;
+                    l.TotalAmount += l.Fine;
+                }
+                
+                l.Outstanding -= payment;
+                l.TotalAmount -= payment;
+                if (l.Outstanding <= 0 && l.TotalAmount > 0)
+                    l.TenorLeft = 1;
+                else if (l.TotalAmount <= 0)
+                    l.TenorLeft = 0;
+                else
+                    l.TenorLeft = l.TenorLeft - 1;
+
                 _db.Loans.Update(l);
                 await _db.SaveChangesAsync();
             }

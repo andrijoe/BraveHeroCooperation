@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BraveHeroCooperation.Data;
+﻿using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Models;
 
 namespace BraveHeroCooperation.Services
@@ -12,7 +7,7 @@ namespace BraveHeroCooperation.Services
     {
         private readonly AppDbContext _db;
         public MemberService(AppDbContext db) => _db = db;
-        public List<object> setDropdown()
+        public List<object> SetDropdown()
         {
             var list = _db.Members.OrderBy(m => m.FullName)
                 .Select(m => new
@@ -24,18 +19,18 @@ namespace BraveHeroCooperation.Services
             return list;
         }
 
-        public Member? findById(int id)
+        public Member? FindById(int id)
         {
             return _db.Members.FirstOrDefault(x => x.Id == id);
         }
 
-        public object setGrid()
+        public List<Member> SetGrid()
         {
             return 
-                _db.Members.OrderByDescending(m=> m.ModDate).ToList();
+                _db.Members.OrderByDescending(m=> m.ModDate).ToList<Member>();
         }
 
-        public async void update(Member member)
+        public async void Update(Member member)
         {
             _db.Members.Update(member);
             await _db.SaveChangesAsync();

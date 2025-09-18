@@ -11,7 +11,6 @@
   <ItemGroup>
     <Folder Include="ApiClient\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Utils\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
