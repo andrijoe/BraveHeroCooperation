@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BraveHeroCooperation.Models
 {
-    internal class Balance
+    public class Balance
     {
         public int Id { get; set; }
-        public Member member { get; set; }
-        public decimal amount { get; set; }
-        public DateTime updateOn { get; set; }
-        public string transactionName {  get; set; }
-        public string flow { get; set; }
+        public String MemberCode { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime UpdateOn { get; set; }
+        public string TransactionName {  get; set; }
+        public string Flow { get; set; }
     }
 }

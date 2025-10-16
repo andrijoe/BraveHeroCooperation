@@ -18,6 +18,7 @@ namespace BraveHeroCooperation.Data
         public DbSet<Saving> Savings => Set<Saving>();
         public DbSet<Inhouse> Inhouses => Set<Inhouse>();
         public DbSet<Exchange> Exchanges => Set<Exchange>();
+        public DbSet<Balance> Balances => Set<Balance>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

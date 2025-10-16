@@ -37,7 +37,7 @@
             // comboProduct
             // 
             comboProduct.FormattingEnabled = true;
-            comboProduct.Items.AddRange(new object[] { "--Choose--", "Loan", "Saving" });
+            comboProduct.Items.AddRange(new object[] { "--Choose--", "Loan", "Saving", "Across Registration" });
             comboProduct.Location = new Point(14, 41);
             comboProduct.Name = "comboProduct";
             comboProduct.Size = new Size(203, 23);

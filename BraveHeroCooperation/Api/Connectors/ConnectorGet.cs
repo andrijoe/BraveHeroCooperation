@@ -11,7 +11,7 @@ namespace BraveHeroCooperation.Api.Connectors
     public class ConnectorGet
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        private String _baseUrl = "localhost:20254/";
+        private String _baseUrl = "http://localhost:20254/";
 
         public async Task<CoopApiResponse?> GetCoopAsync()
         {
@@ -117,9 +117,24 @@ namespace BraveHeroCooperation.Api.Connectors
             return JsonSerializer.Deserialize<TransferApiResponse>(json, options);
         }
 
-        public async Task<TransferApiResponse?> GetTransfersByMemberAsync(String memberCode)
+        public async Task<TransferApiResponse?> GetOutgoingByMemberAsync(String memberCode)
         {
             var response = await _httpClient.GetAsync(_baseUrl + "transfer/history/" + memberCode);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<TransferApiResponse>(json, options);
+        }
+
+        public async Task<TransferApiResponse?> GetIncomingByMemberAsync(String benefCode)
+        {
+            var response = await _httpClient.GetAsync(_baseUrl + "transfer/incoming/" + benefCode);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
@@ -135,6 +150,21 @@ namespace BraveHeroCooperation.Api.Connectors
         public async Task<TransferApiResponse?> GetTransferByCodeAsync(String transferCode)
         {
             var response = await _httpClient.GetAsync(_baseUrl + "transfer/code/" + transferCode);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<TransferApiResponse>(json, options);
+        }
+
+        public async Task<TransferApiResponse?> GetTransfersByCoopAsync(string coopCode)
+        {
+            var response = await _httpClient.GetAsync(_baseUrl + "balance/coop/" + coopCode);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();

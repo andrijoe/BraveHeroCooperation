@@ -12,7 +12,7 @@ namespace BraveHeroCooperation.Api.Connectors
     public class ConnectorPost
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        private String _baseUrl = "localhost:20254/";
+        private String _baseUrl = "http://localhost:20254/";
 
         public async Task<CoopApiResponse?> CoopRegistrationAsync(CoopPayload data)
         {
@@ -21,7 +21,7 @@ namespace BraveHeroCooperation.Api.Connectors
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _httpClient.PostAsync(_baseUrl + "member/save", content);
+            HttpResponseMessage response = await _httpClient.PostAsync(_baseUrl + "coop/save", content);
             response.EnsureSuccessStatusCode();
 
             string responseJson = await response.Content.ReadAsStringAsync();

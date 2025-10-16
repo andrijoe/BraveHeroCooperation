@@ -42,6 +42,7 @@ namespace BraveHeroCooperation.Api.Models
         public string Code { get; set; } = "";
         public string TransferRef { get; set; } = "";
         public string Remarks { get; set; } = "";
+        public string CoopCode { get; set; } = "";
     }
 
     

@@ -37,7 +37,7 @@ namespace BraveHeroCooperation.Api.Models
         public string? MemberCode { get; set; }
         public string? CoopCode { get; set; }
         public BalanceAcross? Balance { get; set; }
-        [JsonPropertyName("memberList")]
+        [JsonPropertyName("balanceList")]
         public List<BalanceAcross> BalanceList { get; set; } = new();
     }
 

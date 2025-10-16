@@ -1,4 +1,6 @@
-﻿using BraveHeroCooperation.Data;
+﻿using BraveHeroCooperation.Api.Connectors;
+using BraveHeroCooperation.Api.Models;
+using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Models;
 using BraveHeroCooperation.Services;
 using BraveHeroCooperation.Utils;
@@ -60,9 +62,35 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     dataGridViewApproval.Columns[i].Visible = false;
                 }
             }
+
+            if (comboProduct.SelectedIndex == 3)
+            {
+                MemberService memberService = new MemberService(db);
+                dataGridViewApproval.AutoGenerateColumns = true;
+                List<Member> members = memberService.SetGrid();
+                List<Member> requestAcrossList = new List<Member>();
+                for (int i = 0; i < members.Count; i++)
+                {
+                    if (members[i].ReferenceId == "REQ")
+                    {
+                        requestAcrossList.Add(members[i]);
+                    }
+                }
+                dataGridViewApproval.DataSource = requestAcrossList;
+                dataGridViewApproval.Columns[0].DataPropertyName = "Id";
+                dataGridViewApproval.Columns[1].DataPropertyName = "FullName";
+                dataGridViewApproval.Columns[2].DataPropertyName = "MemberId";
+                dataGridViewApproval.Columns[3].DataPropertyName = "ReferenceId";
+
+                dataGridViewApproval.Columns[0].Visible = false;
+                dataGridViewApproval.Columns[1].HeaderText = "Full Name";
+                dataGridViewApproval.Columns[2].HeaderText = "Member ID";
+                dataGridViewApproval.Columns[3].HeaderText = "Across Code";
+
+            }
         }
 
-        private void dataGridViewApproval_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridViewApproval_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             AppDbContext db = new AppDbContext();
             if (comboProduct.SelectedIndex == 1)
@@ -87,7 +115,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     }
                     else
                     {
-                        LoanService loanService = new LoanService(db);            
+                        LoanService loanService = new LoanService(db);
                         DialogResult result = MessageBox.Show("Approve?", "Decision", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                         int idLoan = int.Parse(dataGridViewApproval.Rows[e.RowIndex].Cells[0].Value.ToString());
                         if (result == DialogResult.Yes)
@@ -99,9 +127,80 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                         comboProduct.SelectedIndex = 1;
                     }
                 }
-            } else
+            }
+            else
             {
+                if (comboProduct.SelectedIndex == 3)
+                {
+                    if (e.RowIndex >= 0)
+                    {
+                        String message = "";
+                        MemberService memberService = new MemberService(db);
+                        Member? member = memberService.FindById(int.Parse(dataGridViewApproval.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                        if (member == null || member.ReferenceId != "REQ")
+                        {
+                            message = "Member not found or already registered!";
+                        }
+                        else
+                        {
+                            ConnectorPost connectorPost = new ConnectorPost();
+                            ConfigurationService configurationService = new ConfigurationService(db);
+                            Configuration? configuration = await configurationService.GetConfig();
+                            if (configuration == null)
+                                message = "Configuration not found!";
 
+                            if (configuration != null)
+                            {
+                                if (configuration.terminologi3 == null || configuration.terminologi3 == "-")
+                                { 
+                                    CoopApiResponse? coopApiResponse = await connectorPost.CoopRegistrationAsync(new CoopPayload
+                                    {
+                                        name = "Brave Hero Cooperation",
+                                        address = "Jakarta",
+                                        code = ""
+                                    });
+
+                                    if (coopApiResponse != null && coopApiResponse.CoopCode != null)
+                                    {
+                                        configuration.terminologi3 = coopApiResponse.CoopCode;
+                                        configurationService.Update(configuration);
+                                    }
+                                    else
+                                    {
+                                        message = "Failed to register coop to across system: " + coopApiResponse?.ResponseMessage;
+                                    }
+                                }
+
+                                MemberApiResponse? memberApiResponse = await connectorPost.MemberRegistrationAsync(new MemberPayload
+                                {
+                                    name = member.FullName,
+                                    address = member.Address,
+                                    code = member.MemberId,
+                                    coopCode = configuration.terminologi3
+                                });
+
+                                if (memberApiResponse != null && memberApiResponse.ResponseCode == "00")
+                                {
+                                    member.ReferenceId = configuration.terminologi3;
+                                    memberService.Update(member);
+
+                                    BalanceService balanceService = new BalanceService(db);
+                                    balanceService.setBalance(member.MemberId);
+                                }
+                                else
+                                {
+                                    message = "Failed to register member to across system: " + memberApiResponse?.ResponseMessage;
+                                }
+                            }
+                        }
+
+                        if (message != "")
+                        {
+                            MessageBox.Show(message);
+                            return;
+                        }
+                    }
+                }
             }
         }   
 
