@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ApiClient\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Lesson\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 

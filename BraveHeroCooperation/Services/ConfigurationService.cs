@@ -15,7 +15,7 @@ namespace BraveHeroCooperation.Services
             return config;
         }
 
-        public async Task addOrUpdate(String terminologi1, string terminologi2, 
+        public async Task addOrUpdate(String terminologi1, string terminologi2,
             string terminologi3, decimal exchangeRate, decimal inhouseFee,
             decimal accrossFee)
         {
@@ -36,9 +36,17 @@ namespace BraveHeroCooperation.Services
             if (isNew)
             {
                 _db.Add(config);
-            } else { 
+            }
+            else
+            {
                 _db.Update(config);
             }
+            await _db.SaveChangesAsync();
+        }
+
+        public async void Update(Configuration config)
+        {
+            _db.Configurations.Update(config);
             await _db.SaveChangesAsync();
         }
     }

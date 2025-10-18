@@ -149,5 +149,11 @@ namespace BraveHeroCooperation.Forms
             this.Text = title + " << Loan Page >>";
             route(new LoanPage(loggedMember));
         }
+
+        private void acrossCooperationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Text = title + " << Across Transfer Page >>";
+            route(new AcrossTransferPage(loggedMember));
+        }
     }
 }

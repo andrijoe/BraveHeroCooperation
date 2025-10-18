@@ -1,7 +1,8 @@
-﻿using System.Security.Cryptography;
-using BraveHeroCooperation.Data;
+﻿using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Security.Cryptography;
 
 namespace BraveHeroCooperation.Services
 {
@@ -78,6 +79,10 @@ namespace BraveHeroCooperation.Services
             return "";
         }
 
-        
+        public async void UpdateMember(Member loggedMember)
+        {
+            _db.Members.Update(loggedMember);
+            await _db.SaveChangesAsync();
+        }
     }
 }
