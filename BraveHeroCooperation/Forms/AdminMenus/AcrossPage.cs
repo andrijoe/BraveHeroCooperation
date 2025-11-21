@@ -50,7 +50,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             }
             else
             {
-                message = coopApiResponse != null ? coopApiResponse.ResponseCode + " -" 
+                message = coopApiResponse != null ? coopApiResponse.ResponseCode + " - " 
                     + coopApiResponse.ResponseMessage : "Did not get data";
             }
 
@@ -65,8 +65,8 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             }
             else
             {
-                message = balanceApiResponse != null ? balanceApiResponse.ResponseCode + " -" 
-                    + balanceApiResponse.ResponseMessage : "Did not get data");
+                message = balanceApiResponse != null ? balanceApiResponse.ResponseCode + " - " 
+                    + balanceApiResponse.ResponseMessage : "Did not get data";
             }
 
             TransferApiResponse? transferApiResponse = await connectorGet.GetTransfersByCoopAsync(configuration.terminologi3);
@@ -80,8 +80,8 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             }
             else
             {
-                message = transferApiResponse != null ? transferApiResponse.ResponseCode + " -" 
-                    + transferApiResponse.ResponseMessage : "Did not get data");
+                message = transferApiResponse != null ? transferApiResponse.ResponseCode + " - " 
+                    + transferApiResponse.ResponseMessage : "Did not get data";
             }
 
             if (message != "")
@@ -89,7 +89,5 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                 MessageBox.Show("Failed to load data from API.\n Error:" + message);
             }
         }
-
-        
     }
 }
