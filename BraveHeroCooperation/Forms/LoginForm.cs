@@ -29,7 +29,7 @@ namespace BraveHeroCooperation.Forms
                 LoggedInUser = user;
                 if (LoggedInUser.level == "admin")
                 {
-                    this.Hide();
+                    this.Hide(); // this = form login
                     AdminForm form = new AdminForm(LoggedInUser);
                     form.ShowDialog();
                 } else

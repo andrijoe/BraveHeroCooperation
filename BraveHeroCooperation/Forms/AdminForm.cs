@@ -8,7 +8,7 @@ namespace BraveHeroCooperation.Forms
         Member? loggedMember = null;
         public AdminForm(Member member)
         {
-            loggedMember = member;
+            loggedMember = member; // admin
             InitializeComponent();
             this.Text = "Brave Hero Cooperation (Administrator: " +
                 loggedMember.MemberId + " - " + loggedMember.FullName + ")";
