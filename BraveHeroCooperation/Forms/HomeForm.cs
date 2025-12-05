@@ -1,4 +1,6 @@
-﻿using BraveHeroCooperation.Data;
+﻿using BraveHeroCooperation.Api.Connectors;
+using BraveHeroCooperation.Api.Models;
+using BraveHeroCooperation.Data;
 using BraveHeroCooperation.Forms.MemberMenus;
 using BraveHeroCooperation.Forms.PublicMenus;
 using BraveHeroCooperation.Models;
@@ -10,6 +12,8 @@ namespace BraveHeroCooperation.Forms
     {
         Member loggedMember;
         string title;
+        private System.Threading.Timer? balanceTimer;
+        private bool isSyncRunning = false;
         public HomeForm(Member member)
         {
             loggedMember = member;
@@ -122,6 +126,7 @@ namespace BraveHeroCooperation.Forms
         {
             autoDisableMenu();
             grantAccess();
+            StartBackgroundScheduler();
         }
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,6 +159,53 @@ namespace BraveHeroCooperation.Forms
         {
             this.Text = title + " << Across Transfer Page >>";
             route(new AcrossTransferPage(loggedMember));
+        }
+
+        private void StartBackgroundScheduler()
+        {
+            if (isSyncRunning) return;
+
+            // Timer jalan tiap 3 detik (3000 ms)
+            balanceTimer = new System.Threading.Timer(async _ => await SyncBalanceAsync(), null, 0, 3000);
+            isSyncRunning = true;
+        }
+
+        private void StopBackgroundScheduler()
+        {
+            balanceTimer?.Dispose();
+            isSyncRunning = false;
+        }
+
+        private async Task SyncBalanceAsync()
+        {
+            try
+            {
+                AppDbContext db = new AppDbContext();
+                BalanceService balanceService = new BalanceService(db);
+                Balance? balance = await balanceService.getBalance(loggedMember.MemberId);
+                if (balance != null)
+                {
+                    Console.WriteLine($"Syncing balance for member {loggedMember.MemberId}: {balance.Amount}");
+                    ConnectorPost connector = new ConnectorPost();
+                    BalanceApiResponse? response = await connector.BalanceUpdateAsync(new BalancePayload
+                    {
+                        amount = Double.Parse(balance.Amount.ToString()),
+                        memberCode = loggedMember.MemberId
+                    });
+                    if (response != null && response.ResponseCode == "00")
+                    {
+                        Console.WriteLine($"Balance sync successful for member {loggedMember.MemberId}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Balance sync failed for member {loggedMember.MemberId}: {response?.ResponseMessage}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sync:" + ex.Message);
+            }
         }
     }
 }

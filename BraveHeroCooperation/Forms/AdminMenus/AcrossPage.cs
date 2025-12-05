@@ -92,7 +92,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
             }
             else
             {
-                message = coopApiResponse != null ? coopApiResponse.ResponseCode + " -" 
+                message = coopApiResponse != null ? coopApiResponse.ResponseCode + " - " 
                     + coopApiResponse.ResponseMessage : "Did not get data";
             }
 
