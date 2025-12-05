@@ -63,7 +63,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                 }
             }
 
-            if (comboProduct.SelectedIndex == 3)
+            /*if (comboProduct.SelectedIndex == 3)
             {
                 MemberService memberService = new MemberService(db);
                 dataGridViewApproval.AutoGenerateColumns = true;
@@ -87,7 +87,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                 dataGridViewApproval.Columns[2].HeaderText = "Member ID";
                 dataGridViewApproval.Columns[3].HeaderText = "Across Code";
 
-            }
+            }*/ // no need approval for across registration
         }
 
         private async void dataGridViewApproval_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -128,7 +128,7 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                     }
                 }
             }
-            else
+            /*else
             {
                 if (comboProduct.SelectedIndex == 3)
                 {
@@ -201,8 +201,9 @@ namespace BraveHeroCooperation.Forms.AdminMenus
                         }
                     }
                 }
-            }
-        }   
+            
+            }*/
+        }
 
     }
 }

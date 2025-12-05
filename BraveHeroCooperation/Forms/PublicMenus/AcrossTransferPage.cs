@@ -24,22 +24,76 @@ namespace BraveHeroCooperation.Forms.MemberMenus
             InitializeComponent();
         }
 
-        private void AcrossTransferPage_Load(object sender, EventArgs e)
+        private async void AcrossTransferPage_Load(object sender, EventArgs e)
         {
-            if (loggedMember.ReferenceId == null || loggedMember.ReferenceId == "-")
+            timerInbox.Enabled = false;
+            if (loggedMember.ReferenceId == null || loggedMember.ReferenceId == "" || loggedMember.ReferenceId == "-")
             {
                 DialogResult result = MessageBox.Show("You do not have a privilege to Use Across Transfer. Registration Now?", "Invalid", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
-                    loggedMember.ReferenceId = "REQ";
-                    AppDbContext db = new AppDbContext();
-                    AuthService authService = new AuthService(db);
-                    authService.UpdateMember(loggedMember);
+                    String message;
+                    using (var db = new AppDbContext())
+                    {
+                        message = await MemberRegistration(db);
+                    }
+                    MessageBox.Show(message, "Registration Info", MessageBoxButtons.OK);
                 }
             } else
             {
                 timerInbox.Enabled = true;
             }
+        }
+
+        private async Task<String> MemberRegistration(AppDbContext db)
+        {
+            String message = "Succes";
+            MemberService memberService = new MemberService(db);
+            ConnectorPost connectorPost = new ConnectorPost();
+            ConfigurationService configurationService = new ConfigurationService(db);
+            Configuration? configuration = await configurationService.GetConfig();
+            if (configuration == null)
+                message = "Configuration not found!";
+
+            if (configuration != null)
+            {
+                if (configuration.terminologi3 == null || configuration.terminologi3 == "-")
+                {
+                    message = "Coop not registered to Across System. Please contact administrator.";
+                }
+                try
+                {
+                    MemberApiResponse? memberApiResponse = await connectorPost.MemberRegistrationAsync(
+                        new MemberPayload
+                        {
+                            name = loggedMember.FullName,
+                            address = loggedMember.Address,
+                            code = loggedMember.MemberId,
+                            coopCode = configuration.terminologi3!
+                        });
+
+                    if (memberApiResponse != null && memberApiResponse.ResponseCode == "00")
+                    {
+                        loggedMember.ReferenceId = configuration.terminologi3!;
+                        memberService.Update(loggedMember);
+
+                        BalanceService balanceService = new BalanceService(db);
+                        balanceService.setBalance(loggedMember.MemberId);
+
+                        timerInbox.Enabled = true;
+                    }
+                    else
+                    {
+                        message = "Failed to register member to across system: " + memberApiResponse?.ResponseMessage;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = ex.Message;
+
+                }
+            }
+            return message;
         }
 
         private async void buttonSubmit_Click(object sender, EventArgs e)
@@ -87,15 +141,15 @@ namespace BraveHeroCooperation.Forms.MemberMenus
             }
         }
 
-        private void timerInbox_Tick(object sender, EventArgs e)
+        private async void timerInbox_Tick(object sender, EventArgs e)
         {
-            timerInbox.Enabled = false;
-            if (timerInbox.Enabled)
+            timerInbox.Stop();
+            try
             {
-                timerInbox.Start();
+                //timerInbox.Start();
                 Console.WriteLine("Retrieving...");
                 ConnectorGet connectorGet = new ConnectorGet(); 
-                TransferApiResponse? responseOutgoing = connectorGet.GetOutgoingByMemberAsync(loggedMember.MemberId).Result;
+                TransferApiResponse? responseOutgoing = await connectorGet.GetOutgoingByMemberAsync(loggedMember.MemberId);
                 if (responseOutgoing != null && responseOutgoing.ResponseCode == "00")
                 {
                     dgvOutgoing.DataSource = responseOutgoing.TransferList;
@@ -112,7 +166,7 @@ namespace BraveHeroCooperation.Forms.MemberMenus
                     dgvOutgoing.Columns["TransactionCode"].HeaderText = "Transaction Code";
                 }
                 String benefCode = loggedMember.ReferenceId + "-" + loggedMember.MemberId;
-                TransferApiResponse? responseIncoming = connectorGet.GetIncomingByMemberAsync(loggedMember.MemberId).Result;
+                TransferApiResponse? responseIncoming = await connectorGet.GetIncomingByMemberAsync(loggedMember.MemberId);
                 if (responseOutgoing != null && responseOutgoing.ResponseCode == "00")
                 {
                     dgvIncoming.Columns["Id"].Visible = false;
@@ -127,6 +181,15 @@ namespace BraveHeroCooperation.Forms.MemberMenus
                     dgvIncoming.Columns["Remarks"].HeaderText = "Remarks";
                     dgvIncoming.Columns["TransactionCode"].HeaderText = "Transaction Code";
                 }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                timerInbox.Start(); // restart setelah selesai
             }
         }
     }

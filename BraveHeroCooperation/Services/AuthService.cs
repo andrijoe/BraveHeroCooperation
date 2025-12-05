@@ -40,7 +40,7 @@ namespace BraveHeroCooperation.Services
             string quest1, string quest2)
         {
             var hash = BCrypt.Net.BCrypt.HashPassword(password);
-            var memberId = RandomNumberGenerator.GetString("1234567890", 6);
+            var memberId = RandomNumberGenerator.GetString("1234567890", 4);
             var varMember = new Member
             {
                 Username = username,

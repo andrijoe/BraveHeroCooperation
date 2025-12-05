@@ -34,20 +34,24 @@ namespace BraveHeroCooperation.Api.Connectors
 
         public async Task<MemberApiResponse?> MemberRegistrationAsync(MemberPayload data)
         {
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            string json = JsonSerializer.Serialize(data, options);
+           
+                var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+                string json = JsonSerializer.Serialize(data, options);
 
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                try {
+                    HttpResponseMessage response = await _httpClient.PostAsync(_baseUrl + "member/save", content);
+                    response.EnsureSuccessStatusCode();
 
-            HttpResponseMessage response = await _httpClient.PostAsync(_baseUrl + "member/save", content);
-            response.EnsureSuccessStatusCode();
+                    string responseJson = await response.Content.ReadAsStringAsync();
 
-            string responseJson = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<MemberApiResponse>(responseJson, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+                    return JsonSerializer.Deserialize<MemberApiResponse>(responseJson, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                } catch (Exception ex) {
+                    throw new Exception("Error during Member Registration: " + ex.Message);
+                 }
         }
 
         public async Task<BalanceApiResponse?> BalanceUpdateAsync(BalancePayload data)

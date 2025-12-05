@@ -117,7 +117,7 @@ namespace BraveHeroCooperation.Api.Connectors
             return JsonSerializer.Deserialize<TransferApiResponse>(json, options);
         }
 
-        public async Task<TransferApiResponse?> GetOutgoingByMemberAsync(String memberCode)
+        /*public async Task<TransferApiResponse?> GetOutgoingByMemberAsync(String memberCode)
         {
             var response = await _httpClient.GetAsync(_baseUrl + "transfer/history/" + memberCode);
             response.EnsureSuccessStatusCode();
@@ -130,7 +130,51 @@ namespace BraveHeroCooperation.Api.Connectors
             };
 
             return JsonSerializer.Deserialize<TransferApiResponse>(json, options);
+        }*/
+
+        public async Task<TransferApiResponse?> GetOutgoingByMemberAsync(string memberCode)
+        {
+            var json = "";
+            try
+            {
+                //MessageBox.Show("Outgoing: " + $"{_baseUrl}transfer/history/{memberCode}");
+                Mess
+                var response = await _httpClient.GetAsync($"{_baseUrl}transfer/history/{memberCode}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("HTTP Error: " + response.StatusCode);
+                    return null;
+                }
+
+                json = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    MessageBox.Show("Empty JSON response");
+                    return null;
+                }
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                return JsonSerializer.Deserialize<TransferApiResponse>(json, options);
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show("JSON error: " + ex.Message);
+                MessageBox.Show("Raw JSON: " + json);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("General error: " + ex.Message);
+                return null;
+            }
         }
+
 
         public async Task<TransferApiResponse?> GetIncomingByMemberAsync(String benefCode)
         {

@@ -172,7 +172,7 @@
             // 
             // timerInbox
             // 
-            timerInbox.Interval = 1000;
+            timerInbox.Interval = 10000;
             timerInbox.Tick += timerInbox_Tick;
             // 
             // label7

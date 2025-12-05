@@ -181,6 +181,7 @@
             // 
             textReferenceId.Location = new Point(254, 144);
             textReferenceId.Name = "textReferenceId";
+            textReferenceId.ReadOnly = true;
             textReferenceId.Size = new Size(218, 23);
             textReferenceId.TabIndex = 14;
             // 

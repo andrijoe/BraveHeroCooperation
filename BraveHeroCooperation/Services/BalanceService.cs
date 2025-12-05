@@ -14,19 +14,21 @@ namespace BraveHeroCooperation.Services
         private readonly AppDbContext _db;
         public BalanceService(AppDbContext db) => _db = db;
 
-        public async void setBalance(String memberCode)
+        public void setBalance(String memberCode)
         {
-            Balance? balance = await _db.Balances.FirstOrDefaultAsync(b => b.MemberCode == memberCode);
+            Balance? balance = _db.Balances.FirstOrDefault(b => b.MemberCode == memberCode);
             if (balance == null)
             {
                 balance = new Balance
                 {
                     MemberCode = memberCode,
                     Amount = 0,
-                    UpdateOn = DateTime.Now
+                    UpdateOn = DateTime.UtcNow,
+                    TransactionName = "-",
+                    Flow = "-"
                 };
                 _db.Balances.Add(balance);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
             }
         }
 
