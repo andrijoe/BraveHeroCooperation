@@ -11,9 +11,14 @@ namespace BraveHeroCooperation.Services
             _db = db;
         }
 
-        public async Task<Loan?> findById(int id)
+        public async Task<Loan?> findById(int id) // search berdasarkan id
         {
             return await _db.Loans.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public List<Loan> findByName(String name) // search berdasarkan id
+        {
+            return _db.Loans.Where(x => x.Member.FullName == name).ToList<Loan>();
         }
 
         public async Task<List<Installment>> LoadInstallmentsGrid(int loanId)

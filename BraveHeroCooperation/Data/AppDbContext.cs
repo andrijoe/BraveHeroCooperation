@@ -19,6 +19,7 @@ namespace BraveHeroCooperation.Data
         public DbSet<Inhouse> Inhouses => Set<Inhouse>();
         public DbSet<Exchange> Exchanges => Set<Exchange>();
         public DbSet<Balance> Balances => Set<Balance>();
+        public DbSet<BalanceHistory> BalanceHistories => Set<BalanceHistory>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -65,6 +66,9 @@ namespace BraveHeroCooperation.Data
                 .HasOne(x => x.Member)
                 .WithMany(m => m.Exchanges)
                 .HasForeignKey(x => x.MemberId);
+
+            modelBuilder.Entity<BalanceHistory>()
+                .HasNoKey();
 
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {

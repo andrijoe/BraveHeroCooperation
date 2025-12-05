@@ -9,7 +9,9 @@ namespace BraveHeroCooperation.Api.Models
 {
     public class CoopApiResponse
     {
-        public string? CoopCode { get; set; }
+        public string? CoopCode { get; set; } 
+        // ? = bisa menerima inputan null,
+        // ! = nilainya pasti ada, tidak ada nilai null
         public string ResponseCode { get; set; } = "";
         public string ResponseMessage { get; set; } = "";
         public DateTime ResponseTime { get; set; }

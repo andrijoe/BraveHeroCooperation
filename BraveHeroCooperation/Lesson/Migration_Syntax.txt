@@ -2,5 +2,6 @@ Buka Package Manager Console:
 Add-Migration Init (init harus diganti jika sudah pernah melakukan migrasi sebelumnya)
 Update-Database
 
+modelBuilder.UseSerialColumns(); -- taro di onmodelcreating -- error generated
 
 test -776D7C 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BraveHeroCooperation.Services
 {
-    internal class SavingService
+    public class SavingService
     {
     }
 }

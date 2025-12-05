@@ -216,7 +216,7 @@
             Controls.Add(textBalance);
             Controls.Add(label1);
             Name = "AcrossTransferPage";
-            Size = new Size(531, 362);
+            Size = new Size(543, 383);
             Load += AcrossTransferPage_Load;
             ((System.ComponentModel.ISupportInitialize)dgvIncoming).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvOutgoing).EndInit();

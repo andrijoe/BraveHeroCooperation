@@ -12,7 +12,7 @@ namespace BraveHeroCooperation.Api.Connectors
     public class ConnectorPost
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        private String _baseUrl = "http://localhost:20254/";
+        private String _baseUrl = "http://103.82.242.90:20254/";
 
         public async Task<CoopApiResponse?> CoopRegistrationAsync(CoopPayload data)
         {

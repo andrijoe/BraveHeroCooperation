@@ -32,6 +32,7 @@
             CoopCode = new DataGridViewTextBoxColumn();
             CoopName = new DataGridViewTextBoxColumn();
             CoopAddress = new DataGridViewTextBoxColumn();
+            IsDelete = new DataGridViewTextBoxColumn();
             dgvBalance = new DataGridView();
             MemberCode = new DataGridViewTextBoxColumn();
             MemberName = new DataGridViewTextBoxColumn();
@@ -57,11 +58,11 @@
             dgvCoop.AllowUserToAddRows = false;
             dgvCoop.AllowUserToDeleteRows = false;
             dgvCoop.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCoop.Columns.AddRange(new DataGridViewColumn[] { CoopCode, CoopName, CoopAddress });
+            dgvCoop.Columns.AddRange(new DataGridViewColumn[] { CoopCode, CoopName, CoopAddress, IsDelete });
             dgvCoop.Location = new Point(23, 37);
             dgvCoop.Name = "dgvCoop";
             dgvCoop.ReadOnly = true;
-            dgvCoop.Size = new Size(299, 192);
+            dgvCoop.Size = new Size(467, 192);
             dgvCoop.TabIndex = 0;
             // 
             // CoopCode
@@ -82,16 +83,22 @@
             CoopAddress.Name = "CoopAddress";
             CoopAddress.ReadOnly = true;
             // 
+            // IsDelete
+            // 
+            IsDelete.HeaderText = "Telah dihapus?";
+            IsDelete.Name = "IsDelete";
+            IsDelete.ReadOnly = true;
+            // 
             // dgvBalance
             // 
             dgvBalance.AllowUserToAddRows = false;
             dgvBalance.AllowUserToDeleteRows = false;
             dgvBalance.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBalance.Columns.AddRange(new DataGridViewColumn[] { MemberCode, MemberName, Balance });
-            dgvBalance.Location = new Point(328, 37);
+            dgvBalance.Location = new Point(496, 37);
             dgvBalance.Name = "dgvBalance";
             dgvBalance.ReadOnly = true;
-            dgvBalance.Size = new Size(338, 192);
+            dgvBalance.Size = new Size(376, 192);
             dgvBalance.TabIndex = 1;
             // 
             // MemberCode
@@ -121,7 +128,7 @@
             dgvTransfer.Location = new Point(23, 261);
             dgvTransfer.Name = "dgvTransfer";
             dgvTransfer.ReadOnly = true;
-            dgvTransfer.Size = new Size(643, 186);
+            dgvTransfer.Size = new Size(849, 186);
             dgvTransfer.TabIndex = 2;
             // 
             // TransferCode
@@ -172,7 +179,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(426, 19);
+            label2.Location = new Point(496, 19);
             label2.Name = "label2";
             label2.Size = new Size(52, 15);
             label2.TabIndex = 4;
@@ -189,7 +196,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(291, 453);
+            buttonRefresh.Location = new Point(439, 453);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(75, 23);
             buttonRefresh.TabIndex = 6;
@@ -209,7 +216,7 @@
             Controls.Add(dgvBalance);
             Controls.Add(dgvCoop);
             Name = "AcrossPage";
-            Size = new Size(700, 492);
+            Size = new Size(921, 492);
             Load += AcrossPage_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCoop).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvBalance).EndInit();
@@ -239,5 +246,6 @@
         private DataGridViewTextBoxColumn CoopCode;
         private DataGridViewTextBoxColumn CoopName;
         private DataGridViewTextBoxColumn CoopAddress;
+        private DataGridViewTextBoxColumn IsDelete;
     }
 }
