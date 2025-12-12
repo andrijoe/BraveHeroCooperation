@@ -207,5 +207,11 @@ namespace BraveHeroCooperation.Forms
                 Console.WriteLine($"Error sync:" + ex.Message);
             }
         }
+
+        private void exchangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Text = title + " << Exchange Transfer Page >>";
+            route(new ExchangePage(loggedMember));
+        }
     }
 }

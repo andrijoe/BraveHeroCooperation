@@ -110,5 +110,25 @@ namespace BraveHeroCooperation.Services
 
             return result;
         }
+
+        public object SetDropDownSaving()
+        {
+            var data = _db.SavingMasters.OrderBy(x => x.Name)
+                .Select(x => new
+                {
+                    x.Id,
+                    DisplayName = x.Name + ", t:" + x.Tenor + "(" + x.Interest + ")"
+                }).ToList();
+
+            var result = new List<object>
+            {
+                new { Id = 0, DisplayName = "--choose--" }
+            };
+
+            // Gabungkan data asli
+            result.AddRange(data);
+
+            return result;
+        }
     }
 }

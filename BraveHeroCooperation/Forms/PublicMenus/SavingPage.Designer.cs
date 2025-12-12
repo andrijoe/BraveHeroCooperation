@@ -43,7 +43,7 @@
             buttonShowDocSlip = new Button();
             buttonShowDocKk = new Button();
             buttonShowDocKtp = new Button();
-            buttonNewLoan = new Button();
+            buttonNewSaving = new Button();
             buttonApply = new Button();
             buttonFileSlip = new Button();
             buttonFileKK = new Button();
@@ -62,7 +62,7 @@
             textInterest = new TextBox();
             label3 = new Label();
             textTenor = new TextBox();
-            comboLoanMaster = new ComboBox();
+            comboSavingMaster = new ComboBox();
             loanMasterBindingSource = new BindingSource(components);
             label2 = new Label();
             installmentBindingSource = new BindingSource(components);
@@ -72,14 +72,14 @@
             label1 = new Label();
             Fine = new DataGridViewTextBoxColumn();
             loanBindingSource = new BindingSource(components);
-            dataGridViewLoan = new DataGridView();
+            dataGridViewSaving = new DataGridView();
             tenorLeft = new DataGridViewTextBoxColumn();
             folderBrowserDialog1 = new FolderBrowserDialog();
             textAmount = new TextBox();
             ((System.ComponentModel.ISupportInitialize)loanMasterBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)installmentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)loanBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewLoan).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSaving).BeginInit();
             SuspendLayout();
             // 
             // buttonReload
@@ -90,6 +90,7 @@
             buttonReload.TabIndex = 81;
             buttonReload.Text = "Reload";
             buttonReload.UseVisualStyleBackColor = true;
+            buttonReload.Click += buttonReload_Click_1;
             // 
             // label12
             // 
@@ -205,14 +206,15 @@
             buttonShowDocKtp.Text = "Show";
             buttonShowDocKtp.UseVisualStyleBackColor = true;
             // 
-            // buttonNewLoan
+            // buttonNewSaving
             // 
-            buttonNewLoan.Location = new Point(242, 398);
-            buttonNewLoan.Name = "buttonNewLoan";
-            buttonNewLoan.Size = new Size(125, 23);
-            buttonNewLoan.TabIndex = 67;
-            buttonNewLoan.Text = "New Saving";
-            buttonNewLoan.UseVisualStyleBackColor = true;
+            buttonNewSaving.Location = new Point(242, 398);
+            buttonNewSaving.Name = "buttonNewSaving";
+            buttonNewSaving.Size = new Size(125, 23);
+            buttonNewSaving.TabIndex = 67;
+            buttonNewSaving.Text = "New Saving";
+            buttonNewSaving.UseVisualStyleBackColor = true;
+            buttonNewSaving.Click += buttonNewSaving_Click;
             // 
             // buttonApply
             // 
@@ -222,6 +224,7 @@
             buttonApply.TabIndex = 66;
             buttonApply.Text = "Apply Saving";
             buttonApply.UseVisualStyleBackColor = true;
+            buttonApply.Click += buttonApply_Click;
             // 
             // buttonFileSlip
             // 
@@ -240,6 +243,7 @@
             buttonFileKK.TabIndex = 64;
             buttonFileKK.Text = "Browse";
             buttonFileKK.UseVisualStyleBackColor = true;
+            buttonFileKK.Click += buttonFileKK_Click;
             // 
             // buttonFileKTP
             // 
@@ -368,14 +372,14 @@
             textTenor.Size = new Size(204, 23);
             textTenor.TabIndex = 49;
             // 
-            // comboLoanMaster
+            // comboSavingMaster
             // 
-            comboLoanMaster.DataSource = loanMasterBindingSource;
-            comboLoanMaster.FormattingEnabled = true;
-            comboLoanMaster.Location = new Point(22, 90);
-            comboLoanMaster.Name = "comboLoanMaster";
-            comboLoanMaster.Size = new Size(204, 23);
-            comboLoanMaster.TabIndex = 48;
+            comboSavingMaster.DataSource = loanMasterBindingSource;
+            comboSavingMaster.FormattingEnabled = true;
+            comboSavingMaster.Location = new Point(22, 90);
+            comboSavingMaster.Name = "comboSavingMaster";
+            comboSavingMaster.Size = new Size(204, 23);
+            comboSavingMaster.TabIndex = 48;
             // 
             // loanMasterBindingSource
             // 
@@ -435,19 +439,19 @@
             // 
             loanBindingSource.DataSource = typeof(Models.Loan);
             // 
-            // dataGridViewLoan
+            // dataGridViewSaving
             // 
-            dataGridViewLoan.AllowUserToAddRows = false;
-            dataGridViewLoan.AllowUserToDeleteRows = false;
-            dataGridViewLoan.AutoGenerateColumns = false;
-            dataGridViewLoan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewLoan.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, LoanId, outstanding, tenorLeft, Fine });
-            dataGridViewLoan.DataSource = loanBindingSource;
-            dataGridViewLoan.Location = new Point(463, 40);
-            dataGridViewLoan.Name = "dataGridViewLoan";
-            dataGridViewLoan.ReadOnly = true;
-            dataGridViewLoan.Size = new Size(491, 337);
-            dataGridViewLoan.TabIndex = 45;
+            dataGridViewSaving.AllowUserToAddRows = false;
+            dataGridViewSaving.AllowUserToDeleteRows = false;
+            dataGridViewSaving.AutoGenerateColumns = false;
+            dataGridViewSaving.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSaving.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, LoanId, outstanding, tenorLeft, Fine });
+            dataGridViewSaving.DataSource = loanBindingSource;
+            dataGridViewSaving.Location = new Point(463, 40);
+            dataGridViewSaving.Name = "dataGridViewSaving";
+            dataGridViewSaving.ReadOnly = true;
+            dataGridViewSaving.Size = new Size(491, 337);
+            dataGridViewSaving.TabIndex = 45;
             // 
             // tenorLeft
             // 
@@ -481,7 +485,7 @@
             Controls.Add(buttonShowDocSlip);
             Controls.Add(buttonShowDocKk);
             Controls.Add(buttonShowDocKtp);
-            Controls.Add(buttonNewLoan);
+            Controls.Add(buttonNewSaving);
             Controls.Add(buttonApply);
             Controls.Add(buttonFileSlip);
             Controls.Add(buttonFileKK);
@@ -500,17 +504,18 @@
             Controls.Add(textInterest);
             Controls.Add(label3);
             Controls.Add(textTenor);
-            Controls.Add(comboLoanMaster);
+            Controls.Add(comboSavingMaster);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(dataGridViewLoan);
+            Controls.Add(dataGridViewSaving);
             Controls.Add(textAmount);
             Name = "SavingPage";
             Size = new Size(976, 442);
+            Load += SavingPage_Load;
             ((System.ComponentModel.ISupportInitialize)loanMasterBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)installmentBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)loanBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewLoan).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSaving).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -531,7 +536,7 @@
         private Button buttonShowDocSlip;
         private Button buttonShowDocKk;
         private Button buttonShowDocKtp;
-        private Button buttonNewLoan;
+        private Button buttonNewSaving;
         private Button buttonApply;
         private Button buttonFileSlip;
         private Button buttonFileKK;
@@ -550,7 +555,7 @@
         private TextBox textInterest;
         private Label label3;
         private TextBox textTenor;
-        private ComboBox comboLoanMaster;
+        private ComboBox comboSavingMaster;
         private BindingSource loanMasterBindingSource;
         private Label label2;
         private BindingSource installmentBindingSource;
@@ -560,7 +565,7 @@
         private Label label1;
         private DataGridViewTextBoxColumn Fine;
         private BindingSource loanBindingSource;
-        private DataGridView dataGridViewLoan;
+        private DataGridView dataGridViewSaving;
         private DataGridViewTextBoxColumn tenorLeft;
         private FolderBrowserDialog folderBrowserDialog1;
         private TextBox textAmount;

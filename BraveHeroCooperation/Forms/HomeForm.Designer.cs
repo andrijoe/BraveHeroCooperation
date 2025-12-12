@@ -115,13 +115,13 @@
             // inhouseToolStripMenuItem
             // 
             inhouseToolStripMenuItem.Name = "inhouseToolStripMenuItem";
-            inhouseToolStripMenuItem.Size = new Size(180, 22);
+            inhouseToolStripMenuItem.Size = new Size(116, 22);
             inhouseToolStripMenuItem.Text = "Inhouse";
             // 
             // acrossCooperationToolStripMenuItem
             // 
             acrossCooperationToolStripMenuItem.Name = "acrossCooperationToolStripMenuItem";
-            acrossCooperationToolStripMenuItem.Size = new Size(180, 22);
+            acrossCooperationToolStripMenuItem.Size = new Size(116, 22);
             acrossCooperationToolStripMenuItem.Text = "Across";
             acrossCooperationToolStripMenuItem.Click += acrossCooperationToolStripMenuItem_Click;
             // 
@@ -130,6 +130,7 @@
             exchangeToolStripMenuItem.Name = "exchangeToolStripMenuItem";
             exchangeToolStripMenuItem.Size = new Size(70, 20);
             exchangeToolStripMenuItem.Text = "Exchange";
+            exchangeToolStripMenuItem.Click += exchangeToolStripMenuItem_Click;
             // 
             // historyToolStripMenuItem
             // 
