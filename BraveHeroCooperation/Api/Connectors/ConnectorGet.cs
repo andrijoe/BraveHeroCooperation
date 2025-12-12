@@ -138,7 +138,7 @@ namespace BraveHeroCooperation.Api.Connectors
             try
             {
                 //MessageBox.Show("Outgoing: " + $"{_baseUrl}transfer/history/{memberCode}");
-                Mess
+                
                 var response = await _httpClient.GetAsync($"{_baseUrl}transfer/history/{memberCode}");
 
                 if (!response.IsSuccessStatusCode)

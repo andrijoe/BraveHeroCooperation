@@ -45,7 +45,8 @@ namespace BraveHeroCooperation.Api.Connectors
 
                     string responseJson = await response.Content.ReadAsStringAsync();
 
-                    return JsonSerializer.Deserialize<MemberApiResponse>(responseJson, new JsonSerializerOptions
+                    return JsonSerializer.Deserialize<MemberApiResponse>(responseJson, 
+                        new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     });

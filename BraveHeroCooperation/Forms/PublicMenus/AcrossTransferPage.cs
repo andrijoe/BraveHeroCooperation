@@ -29,7 +29,9 @@ namespace BraveHeroCooperation.Forms.MemberMenus
             timerInbox.Enabled = false;
             if (loggedMember.ReferenceId == null || loggedMember.ReferenceId == "" || loggedMember.ReferenceId == "-")
             {
-                DialogResult result = MessageBox.Show("You do not have a privilege to Use Across Transfer. Registration Now?", "Invalid", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show(
+                    "You do not have a privilege to Use Across Transfer. Registration Now?", 
+                    "Invalid", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     String message;
@@ -167,7 +169,7 @@ namespace BraveHeroCooperation.Forms.MemberMenus
                 }
                 String benefCode = loggedMember.ReferenceId + "-" + loggedMember.MemberId;
                 TransferApiResponse? responseIncoming = await connectorGet.GetIncomingByMemberAsync(loggedMember.MemberId);
-                if (responseOutgoing != null && responseOutgoing.ResponseCode == "00")
+                if (responseIncoming != null && responseIncoming.ResponseCode == "00")
                 {
                     dgvIncoming.Columns["Id"].Visible = false;
                     dgvIncoming.Columns["MemberCode"].HeaderText = "Member Code";
