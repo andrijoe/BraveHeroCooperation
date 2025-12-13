@@ -39,7 +39,7 @@ namespace BraveHeroCooperation.Forms.MemberMenus
                 decimal amount = Convert.ToDecimal(txtAmount.Text);
                 decimal rate = Convert.ToDecimal(txtRate.Text);
                 decimal fee = Convert.ToDecimal(txtFee.Text);
-                decimal total = (amount * rate) + fee;
+                decimal total = (amount * rate) - fee;
                 txtTotal.Text = total.ToString("0.00");
             }
             catch (Exception)

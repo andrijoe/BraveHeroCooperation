@@ -27,13 +27,6 @@ namespace BraveHeroCooperation.Services
             return _db.Savings.Where(x => x.Member.FullName == name).ToList<Saving>();
         }
 
-        public async Task<List<Saving>> LoadSavingGrid(int memberId)
-        {
-            return await _db.Savings
-                .Where(x => x.MemberId == memberId)
-                .OrderByDescending(x => x.CreatedOn).ToListAsync();
-        }
-
         public async Task saveOrUpdate(Member member, string amount, string ktp,
             string kk, string slip, string dueDate, string interest,
             string interestFine, string savingId, string tenor, string adminFee)
@@ -93,6 +86,13 @@ namespace BraveHeroCooperation.Services
                 .Include(x => x.Member)
                 .OrderByDescending(x => x.CreatedOn)
                 .ToListAsync();
+        }
+
+        public async Task<List<Saving>> LoadSavingGrid(int memberId)
+        {
+            return await _db.Savings
+                .Where(x => x.MemberId == memberId)
+                .OrderByDescending(x => x.CreatedOn).ToListAsync();
         }
 
         public async void SetApproval(int id, bool isApprove)
